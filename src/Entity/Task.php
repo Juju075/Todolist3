@@ -1,13 +1,12 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
+use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
- * @ORM\Table
+ * @ORM\Entity(repositoryClass=TaskRepository::class)
  */
 class Task
 {
