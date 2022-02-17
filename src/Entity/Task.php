@@ -1,37 +1,38 @@
 <?php
-
+declare(strict_types = 1); 
 namespace App\Entity;
 
-use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint as Assert;
+use App\Entity\Traits\Timestampable;
+use Assert\NotBlank;
 
-/**
- * @ORM\Entity(repositoryClass=TaskRepository::class)
- */
+
+#[ORM\Entity(repositoryClass: TaskRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
+
 class Task
 {
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    use Timestampable;
+
+    
+    #[ORM\Column(type: "integer")]
+    #[ORM\Id] 
+    #[ORM\GeneratedValue(strategy: "AUTO")] 
     private $id;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+
+    #[ORM\Column(type: "datetime")]
     private $createdAt;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Vous devez saisir un titre.")
-     */
+
+    #[ORM\Column(type: "string")]
+    #[NotBlank(message: "Vous devez saisir un titre.")]
     private $title;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message="Vous devez saisir du contenu.")
-     */
+
+    #[ORM\Column(type: "text")]
+    #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
     private $content;
 
     /**
@@ -89,4 +90,6 @@ class Task
     {
         $this->isDone = $flag;
     }
+
+
 }
