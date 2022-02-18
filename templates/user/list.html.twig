@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html.twig' %} {% block header_title %} {% block
+header_img %}{% endblock %} {% block header_title %}
+<h1>Users list</h1>
+{% endblock %} {% block body %} {% if users|length == 0 %}
+<div class="alert alert-warning" role="alert">
+  Users not yet register.
+  <a href="{{ path('user_create') }}" class="btn btn-warning pull-right"
+    >Create a User</a
+  >
+</div>
+{% else %}
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>User address</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <a
+            href="{{ path('user_edit', { id: user.id }) }}"
+            class="btn btn-success btn-sm"
+            >Edit</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %} {% endblock %}

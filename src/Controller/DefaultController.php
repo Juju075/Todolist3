@@ -11,8 +11,7 @@ class DefaultController extends AbstractController
     #[Route('/', name: 'homepage')]
     public function index(): Response
     {
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
+        //Erreur envoie sur une fonction php (boucle)
+        return $this->render('default/index.html.twig');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +31,7 @@ class UserController extends AbstractController
         return $this->render('user/list.html.twig', ['users' => $userRepo->findAll()]);
     }
 
-    #[Route("/users/create", name:"user_create", methods: [])]
+    #[Route("/users/create", name:"user_create", methods: ["GET"])]
     public function createAction(Request $request)
     {
         $user = new User();
