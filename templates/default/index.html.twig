@@ -7,13 +7,13 @@
 
 <div class="row">
   <a href="{{ path('task_create') }}" class="btn btn-success"
-    >Créer une nouvelle tâche</a
+    >Create new task</a
   >
   <a href="{{ path('task_list') }}" class="btn btn-info"
-    >Consulter la liste des tâches à faire</a
+    >Check all task to do</a
   >
-  <a href="" class="btn btn-secondary"
-    >Consulter la liste des tâches terminées</a
+  <a href="{{ path('task_isdone') }}" class="btn btn-secondary"
+    >Check terminated tasks</a
   >
 </div>
 {% endblock %}

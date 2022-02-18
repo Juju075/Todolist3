@@ -95,4 +95,10 @@ class TaskController extends AbstractController
             'controller_name' => 'TaskController',
         ]);
     }
+
+    #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
+    public function allIsdoneTask(TaskRepository $taskRepo) 
+    {
+        return $this->render('task/isdoneList.html.twig', ['lists' => $taskRepo->findBy(['isdone'=>'true'])]) ;
+    }
 }

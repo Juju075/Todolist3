@@ -36,9 +36,7 @@ class Task
     #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
     private $content;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: "boolean")]
     private $isDone;
 
     public function __construct()
