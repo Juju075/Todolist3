@@ -1,32 +1,28 @@
 <?php
-declare(strict_types = 1); 
-namespace AppBundle\Controller;
 
-use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
+namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
-
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
     /**
-     * Construct
+     * Undocumented function
      *
      * @param EntityManagerInterface $em
      * @param UserPasswordHasherInterface $userPasswordHasher
      */
-    public function __construct(private EntityManagerInterface $em, 
-                                private UserPasswordHasherInterface $userPasswordHasher
-                                ){}
-
+    public function __construct(
+        private EntityManagerInterface $em, 
+        private UserPasswordHasherInterface $userPasswordHasher
+    ){}
 
     #[Route("/users", name: "user_list",methods: ["GET"])]
     public function listAction(UserRepository $userRepo)
@@ -59,8 +55,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
-    }
-
+    }    
     #[Route("/users/{id}/edit", name: "user_edit", methods: [])]
     public function editAction(User $user, Request $request)
     {
@@ -84,5 +79,5 @@ class UserController extends AbstractController
         }    
 
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
-    }
+    }    
 }

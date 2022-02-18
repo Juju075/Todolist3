@@ -21,6 +21,7 @@ class TaskController extends AbstractController
     public function __construct(private EntityManagerInterface $em 
     ){}
 
+
     #[Route("/tasks", name: "task_list")]
     public function listAction(TaskRepository $taskRepo)
     {
@@ -86,17 +87,8 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-
-
-
-
-
-
-
-
-
     #[Route('/task', name: 'task')]
-    public function index(): Response
+    public function index1(): Response
     {
         return $this->render('task/index.html.twig', [
             'controller_name' => 'TaskController',
