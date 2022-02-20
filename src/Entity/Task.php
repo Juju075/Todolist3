@@ -28,12 +28,15 @@ class Task
 
 
     #[ORM\Column(type: "string")]
-    #[NotBlank(message: "Vous devez saisir un titre.")]
+    #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
+    #[Assert\length(min: 3, minMessage: "Saissisez plus de caracteres.")]
+    //minimum de 3 caracteres.
     private $title;
 
 
     #[ORM\Column(type: "text")]
-    #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
+    #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
+    #[Assert\length(min: 3, minMessage: "Saissisez plus de caracteres.")]
     private $content;
 
     #[ORM\Column(type: "boolean")]
