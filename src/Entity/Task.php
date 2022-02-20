@@ -17,29 +17,29 @@ class Task
     use Timestampable;
 
     
-    #[ORM\Column(type: "integer")]
     #[ORM\Id] 
-    #[ORM\GeneratedValue(strategy: "AUTO")] 
+    #[ORM\GeneratedValue(strategy: 'AUTO')] 
+    #[ORM\Column(type: 'integer')]
     private $id;
 
 
-    #[ORM\Column(type: "datetime")]
+    #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
 
-    #[ORM\Column(type: "string")]
-    #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
-    #[Assert\length(min: 3, minMessage: "Saissisez plus de caracteres.")]
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
+    #[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     //minimum de 3 caracteres.
     private $title;
 
 
-    #[ORM\Column(type: "text")]
-    #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
-    #[Assert\length(min: 3, minMessage: "Saissisez plus de caracteres.")]
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
+    #[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     private $content;
 
-    #[ORM\Column(type: "boolean")]
+    #[ORM\Column(type: 'boolean')]
     private $isDone;
 
     public function __construct()

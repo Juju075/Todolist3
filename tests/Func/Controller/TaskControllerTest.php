@@ -2,17 +2,22 @@
 
 namespace App\Tests;
 
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskControllerTest extends WebTestCase
 {
 
-    public function testSomething(): void
+    //Refactoring
+
+
+    public function testlistAction(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/');
+        //Request
+        $crawler = $client->request('GET', '/tasks');
 
-        $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello World');
+        //Code 200 |Si task non empty expected 
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 }
