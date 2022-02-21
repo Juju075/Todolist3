@@ -42,9 +42,11 @@ class TaskControllerTest extends WebTestCase
     {
         $this->getCrawler('POST', '/tasks/create');
 
-        //Form create task (remplir les fields)
+        //Create Task Form (complet 2 fields & submit).
+        //Page title must be <title></title>
 
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
+        $this->assertSelectorTextContains('title', 'text' );
     }
 
 
