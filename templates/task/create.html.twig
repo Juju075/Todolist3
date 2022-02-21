@@ -1,5 +1,4 @@
-{% extends 'layouts/base.html.twig' %}{% block title %}Create{% endblock %} {%
-block body %}
+{% extends 'layouts/base.html.twig' %} {% block body %}
 <div class="row">
   {{ form_start(form, { action: path("task_create") }) }}
   {{ form_widget(form) }}
