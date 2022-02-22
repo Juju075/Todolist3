@@ -16,8 +16,6 @@ class TaskControllerTest extends WebTestCase
     private $id;
     private $crawler;
 
-    
-    
     public function setuP(): void
     {
         $client = static::createClient();
@@ -68,6 +66,7 @@ class TaskControllerTest extends WebTestCase
     {
 
         $this->getCrawler('POST', '/tasks/create');
+        $crawler = $this->client->followRedirect();
 
         //Create Task Form (complet 2 fields & submit).
         //Page title must be <title></title>
@@ -81,7 +80,7 @@ class TaskControllerTest extends WebTestCase
     {
         //connecte l'utilisateur id
         $this->getCrawler('UPDATE', '/tasks//'. $this->id .'/edit');
-         $crawler = $this->client->followRedirect();
+        $crawler = $this->client->followRedirect();
          
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);      
     }
@@ -89,7 +88,7 @@ class TaskControllerTest extends WebTestCase
     public function testToggleTaskAction(): void
     {
         $this->getCrawler('GET', '/tasks//'. $this->id .'/toggle');
-         $crawler = $this->client->followRedirect();
+        $crawler = $this->client->followRedirect();
           
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);     
     }
