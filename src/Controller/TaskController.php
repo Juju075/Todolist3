@@ -3,6 +3,8 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
+
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,6 +30,12 @@ class TaskController extends AbstractController
     {
         return $this->render('task/list.html.twig', ['tasks' => $taskRepo->findAll()]);
     }
+ 
+    #[Route("/task/isdone", name: "task_list_terminated")]
+    public function listTerminatedAction(TaskRepository $taskRepo)
+    {
+        return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
+    }
 
     #[Route("/tasks/create", name: "task_create")]
     public function createAction(Request $request)
@@ -37,6 +45,7 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $task->setUser($this->getUser());
             $this->em->persist($task);
             $this->em->flush();
 
@@ -77,15 +86,20 @@ class TaskController extends AbstractController
     }
 
 
+    // etre proprietaire pour delete 
     #[Route("/tasks/{id}/delete", name: "task_delete")]
     public function deleteTaskAction(Task $task)
     {
-        $this->em->remove($task);
-        $this->em->flush();
-
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
-
-        return $this->redirectToRoute('task_list');
+        //|| $task->getUser === 'ROLE_ADMIN' 
+        if($this->getUser() === $task->getUser() ){
+            $this->em->remove($task);
+            $this->em->flush();
+    
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+    
+            return $this->redirectToRoute('task_list');
+        }
+            $this->addFlash('success', 'Vous devez etre l\'auteur de la task pour la supprimer.');
     }
 
     #[Route('/task', name: 'task')]
@@ -97,6 +111,7 @@ class TaskController extends AbstractController
     }
 
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
+    //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     public function allIsdoneTask(TaskRepository $taskRepo) 
     {
         return $this->render('task/isdoneList.html.twig', ['lists' => $taskRepo->findBy(['isdone'=>'true'])]) ;

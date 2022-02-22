@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\User;
@@ -57,7 +57,7 @@ class UserController extends AbstractController
 
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }    
-    #[Route('/users/{id}/edit', name: 'user_edit', methods: ['POST'])]
+    #[Route('/users/{id}/edit', name: 'user_edit', methods: ['GET','POST'])]
     public function editAction(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user);

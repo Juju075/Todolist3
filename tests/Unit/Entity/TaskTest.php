@@ -78,7 +78,7 @@ class TaskTest extends KernelTestCase
             $attribut4 = $this->task->getCreatedAt(); 
             
             //Assertions
-            $this->assertContains($attribut1); //expected not null & int
+            $this->assertNotEmpty($attribut1); //expected not null & int
             $this->assertContains($attribut2); //expected not null & string
             $this->assertContains($attribut3); //expected not null & string
             $this->assertContains($attribut4); //expected not null & datetime

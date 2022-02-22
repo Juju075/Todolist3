@@ -15,7 +15,7 @@ class TaskType extends AbstractType
         $builder
             ->add('title')
             ->add('content', TextareaType::class)
-            //->add('author') ===> must be the user authenticated
+            ->add('category', EntityType::class, ['class'=>Category::class, 'choice_label'=>'nom'])
             ;
     }
 

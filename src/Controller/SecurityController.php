@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +23,8 @@ class SecurityController extends AbstractController
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
+
+    
 
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void

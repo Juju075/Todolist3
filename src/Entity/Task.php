@@ -26,7 +26,6 @@ class Task
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
-
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
     #[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]

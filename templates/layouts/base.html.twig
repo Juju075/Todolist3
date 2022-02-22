@@ -44,12 +44,12 @@
           >Create user</a
         >
         {% if app.user %}
-        <a href="{{ path('logout') }}" class="pull-right btn btn-danger"
-          >Login</a
+        <a href="{{ path('app_logout') }}" class="pull-right btn btn-danger"
+          >Logout</a
         >
         {% endif %} {% if not app.user and 'login' !=
         app.request.attributes.get('_route') %}
-        <a href="{{ path('app_login') }}" class="btn btn-success">Logout</a>
+        <a href="{{ path('app_login') }}" class="btn btn-success">Login</a>
         {% endif %}
       </div>
 

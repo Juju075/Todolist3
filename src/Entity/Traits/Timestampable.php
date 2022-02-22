@@ -1,12 +1,14 @@
 <?php
+declare(strict_types = 1);
 namespace App\Entity\Traits;
-
 
     trait Timestampable
     {
         /**
          * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
          */
+        
+        //#[ORM\Column(type: 'datetime', options: ['default': 'CURRENT_TIMESTAMP'])]
         private $createdAt;
     
         /**
@@ -42,10 +44,8 @@ namespace App\Entity\Traits;
         }
     
 
-        /**
-         * @ORM\PrePersist
-         * @ORM\PreUpdate
-         */
+        #[ORM\PrePersist]
+        #[ORM\PreUpdate]
         public function updateTimestamps()
         {
             if ($this->getCreatedAt() === null) {

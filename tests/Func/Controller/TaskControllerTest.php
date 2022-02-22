@@ -11,9 +11,26 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class TaskControllerTest extends WebTestCase
 {
+
+    private $client;
+    private $id;
     private $crawler;
-    private $id = 1;
+
     
+    
+    public function setuP(): void
+    {
+        $client = static::createClient();
+        $this->id = 1; //utilisateur connecte (user ou admin)
+    }
+
+    public function tearDown(): void
+    {
+        $this->client = null;
+        $this->id = null;
+        $this->crawler = null;
+    }
+
     /**
      * The request() method returns a Symfony\Component\DomCrawler\Crawler 
      * object which can be used to select elements in the response.
@@ -24,12 +41,21 @@ class TaskControllerTest extends WebTestCase
      */
     public function getCrawler(string $method, string $url): void
     {
-        $client = static::createClient();
-        //Request
-        $this->crawler = $client->request($method, $url);
+        $this->crawler = $this->client->request($method, $url);
     }
 
-    //Refactoring
+
+    public function testLoginAsAdmin(): void
+    {
+        //Form Login     
+        //assertion message 'Your are logged in as ADMIN'
+    }
+
+    public function testLoginAsUser(): void
+    {
+        //Form Login
+        //assertion message 'Your are logged in as USER'
+    }
 
 
     public function testlistAction(): void
@@ -40,6 +66,7 @@ class TaskControllerTest extends WebTestCase
 
     public function testcreateAction(): void
     {
+
         $this->getCrawler('POST', '/tasks/create');
 
         //Create Task Form (complet 2 fields & submit).
@@ -50,23 +77,36 @@ class TaskControllerTest extends WebTestCase
     }
 
 
-    public function testEditAction(int $id): void
+    public function testEditAction(): void
     {
-        $this->getCrawler('UPDATE', '/tasks//'. $id .'/edit');
+        //connecte l'utilisateur id
+        $this->getCrawler('UPDATE', '/tasks//'. $this->id .'/edit');
+         $crawler = $this->client->followRedirect();
+         
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);      
     }
 
-    public function testToggleTaskAction(int $id): void
+    public function testToggleTaskAction(): void
     {
-        $this->getCrawler('GET', '/tasks//'. $id .'/toggle');
+        $this->getCrawler('GET', '/tasks//'. $this->id .'/toggle');
+         $crawler = $this->client->followRedirect();
+          
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);     
     }
 
-    public function testDeleteTaskAction(int $id)
+    public function testDeleteTaskAction()
     {
-        $this->getCrawler('DELETE', '/tasks//'. $id .'/delete');
+        $this->getCrawler('DELETE', '/tasks//'. $this->id .'/delete');
+        $crawler = $this->client->followRedirect();
+         
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);       
     }
 
     public function testAllIsDoneTask()
     {
         $this->getCrawler('GET', '/task/isdone');
+        $crawler = $this->client->followRedirect();
+        
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 }
