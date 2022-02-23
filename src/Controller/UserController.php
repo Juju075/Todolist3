@@ -31,7 +31,7 @@ class UserController extends AbstractController
         return $this->render('user/list.html.twig', ['users' => $userRepo->findAll()]);
     }
 
-    #[Route('/users/create', name:'user_create', methods: ['GET', 'POST'])]
+    #[Route('admin/users/create', name:'user_create', methods: ['GET', 'POST'])]
     public function createAction(Request $request)
     {
         $user = new User();
@@ -40,9 +40,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //$password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
-
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
 
             $user->setPassword($password);

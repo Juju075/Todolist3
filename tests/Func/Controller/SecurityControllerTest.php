@@ -36,7 +36,7 @@ class SecurityControllerTest extends WebTestCase
     //Refactoring 
     public function testLoginWithRighCredentials($password = 'identique')
     {
-        $this->getCrawler('GET', '/login');
+        $this->getCrawler('POST', '/login');
 
         $this->crawler->selectButton('Login');
         $form = $this->crawler->form([
@@ -46,12 +46,12 @@ class SecurityControllerTest extends WebTestCase
         //Nouvelle requete
         $this->client->submit($form);
 
-        //$crawler = $this->client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         //message success
         //$this->assertSame('Se déconnecter', $crawler->filter('a.pull-right.btn.btn-danger')->text());
-        $this->assertSelectorExists('.alert.alert-success'); //Message flaxh succes
+        $this->assert
     }
 
     public function testLoginWithBadPassword()

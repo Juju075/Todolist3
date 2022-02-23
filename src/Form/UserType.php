@@ -26,13 +26,10 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
             ])
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Roles de l\'utilisateur',
-                'choices' => ['ROLE_ADMIN' => 'ROLE_ADMIN', 'ROLE_USER' => 'ROLE_USER'],
-                'required' => true,
-                'multiple' => true,
-                'expanded' => true,
-            ]);
+            
+            //faire checkbox CheckboxType Field
+
+
         ;
     }
 

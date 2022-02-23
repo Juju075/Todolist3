@@ -1,29 +1,28 @@
 <?php
-declare(strict_types = 1); 
+
 namespace App\Form;
 
-use App\Entity\Task;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
-class TaskType extends AbstractType
+class User1Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('content', TextareaType::class)
-           
-            ;
+            ->add('username')
+            ->add('email')
+            ->add('roles')
+            ->add('password')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Task::class,
+            'data_class' => User::class,
         ]);
     }
 }

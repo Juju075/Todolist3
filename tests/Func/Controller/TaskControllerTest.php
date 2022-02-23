@@ -16,9 +16,9 @@ class TaskControllerTest extends WebTestCase
     private $id;
     private $crawler;
 
-    public function setuP(): void
+    public function setUp(): void
     {
-        $client = static::createClient();
+        $this->client = static::createClient();
         $this->id = 1; //utilisateur connecte (user ou admin)
     }
 
@@ -59,7 +59,10 @@ class TaskControllerTest extends WebTestCase
     public function testlistAction(): void
     {
         $this->getCrawler('GET', '/tasks');
+        $crawler = $this->client->followRedirect();
+
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertSelectorTextContains('title', 'message' );
     }
 
     public function testcreateAction(): void
