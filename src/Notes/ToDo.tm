@@ -30,7 +30,7 @@ Modifications
 [check] user edit | Lors de la modification d’un utilisateur, il est également possible de changer le rôle d’un utilisateur.
 [a voir] (ou sont les pages de  gestion utilisateurs. )| Seuls (ROLE_ADMIN) pouront accéder aux pages de gestion des utilisateurs.
 
-[] Fixtures users account and tasks (server test)
+[90%] Fixtures users account and tasks (server test)
 
 [] fixe issue form checkbox
 [X] Crud user ds Admin (reecriture name)
@@ -38,12 +38,17 @@ Modifications
 [] Documentation Audit
 [] deleteTaskAction() ajouter un voter (author) event
 
-[] Model Assertion (Response)
-[] Model Assertion (Form)
+Tests:
+[]Load fixture tests
+[compris] Model Assertion (Response)
+[compris] Model Assertion (Form)
+
+Pages Admin
+[X] /admin mettre template
 
 []Documentation technique concernant l’implémentation de l’authentification (fichier au format PDF)
 
-competences
+:competences
 Produire un rapport de l’exécution des tests
 Analyser la qualité de code et la performance d’une application
 Fournir des patchs correctifs lorsque les tests le suggèrent

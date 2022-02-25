@@ -1,0 +1,6 @@
+App\Entity\User:
+  user_user:
+    email: "testuser@gmail.com"
+    roles: "[]"
+    password: ""
+#bcrypt online

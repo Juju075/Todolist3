@@ -25,7 +25,9 @@ class AdminController extends AbstractController
     public function __construct(
         private EntityManagerInterface $em, 
         private UserPasswordHasherInterface $userPasswordHasher
-    ){}
+    ){
+        
+    }
 
 
     #[Route('/', name: 'app_admin', methods: ['GET'])]

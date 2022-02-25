@@ -14,33 +14,27 @@ class TasksFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        //Comment avoir la liste des refs cree (nombre)
-        //1 Admin(0)
-        //3 User (1-3)
-
-
-
-
-        //Tasks users
+        //Tasks role_users
         for ($nbUser=1; $nbUser <3 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
-            $task = new Task();
 
-            //cree entre 3-12 tasks
-            for ($nbTask=0; $nbTask < random() ; $nbTask++) { 
-                //
+            for ($nbTask=0; $nbTask < rand(3, 12) ; $nbTask++) { 
+            $task = (new Task())
+            ->setTitle($faker->title())
+            ->setContent($faker->content())
+            ->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'))
+            ;
+            
+            $user->addTask($task);
             }
-
         }
-        //Chaque user role_user cree (entre 6 - 12 taches)
-       // chaque user valide 3 taches au hasard ds la liste des taches cree.
-
-       // for 3 user role_user
-       //creer 1 user role_user
-       //cet user cree liste = random(6, 12) taches
-
-        //for 3 numero random dans la liste
-        //user valide la tache
-
     }
+
+    public function getDependencies() : array
+    {
+        return array(
+            UserFixtures::class,
+        );
+    }
+
 }
