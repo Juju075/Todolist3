@@ -25,8 +25,8 @@
       <div>
         <form action="{{ path('task_toggle', { id: task.id }) }}">
           <button class="btn btn-success btn-sm pull-right">
-            {% if not task.isDone %}Marquer comme faite{% else %}Marquer non
-            terminée{% endif %}
+            {% if not task.isDone %}Task done{% else %}Unfinished tasks.{% endif
+            %}
           </button>
         </form>
         <form action="{{ path('task_delete', { id: task.id }) }}">

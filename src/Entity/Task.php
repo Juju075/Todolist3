@@ -6,8 +6,6 @@ use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Traits\Timestampable;
-use Assert\NotBlank;
-
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 #[ORM\HasLifecycleCallbacks()]
@@ -26,16 +24,16 @@ class Task
     #[ORM\Column(type: 'datetime')]
     private $createdAt;
 
+    //#[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
-    #[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     //minimum de 3 caracteres.
     private $title;
 
 
+    //#[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank(message: 'Vous devez saisir un titre.')]
-    #[Assert\length(min: 3, minMessage: 'Saissisez plus de caracteres.')]
     private $content;
 
     #[ORM\Column(type: 'boolean')]

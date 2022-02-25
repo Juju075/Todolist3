@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -26,11 +26,18 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
             ])
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
-            
-            //faire checkbox CheckboxType Field
 
+            // <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+        
+            //1 => 'ROLE_USER',
+            //2 => 'ROLE_ADMIN'
 
-        ;
+            ->add('roles', CheckboxType::class, [
+                'label'    => 'role',
+                'value'    => [0 => 'ROLE_USER', 1 => 'ROLE_ADMIN'],
+                'required' => true,
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

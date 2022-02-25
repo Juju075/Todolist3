@@ -16,8 +16,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    use Timestampable;    
-
+    use Timestampable;      
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -39,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: "json")]
     private $roles = [];
+
 
     /**
      * @var string The hashed password
@@ -161,3 +161,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 }
+

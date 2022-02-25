@@ -16,6 +16,8 @@ class TaskControllerTest extends WebTestCase
     private $id;
     private $crawler;
 
+    //echo $client->getResponse()->getContent();
+
     public function setUp(): void
     {
         $this->client = static::createClient();
