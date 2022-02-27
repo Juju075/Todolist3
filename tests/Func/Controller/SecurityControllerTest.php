@@ -72,7 +72,6 @@ class SecurityControllerTest extends WebTestCase
         $this->getCrawler('GET', '/logout');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertResponseRedirects();
         $this->assertSelectorTextContains();
     }
 }

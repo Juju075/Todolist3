@@ -2,5 +2,5 @@ App\Entity\User:
   user_user:
     email: "testuser@gmail.com"
     roles: "[]"
-    password: ""
+    password: "$2y$10$0MjVprTf8y9t/s7/T35b8.arciM8TQogeVifqpKsT4ceWqJF7eIuG"
 #bcrypt online

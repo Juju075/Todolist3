@@ -70,11 +70,8 @@ class TaskController extends AbstractController
     }
 
 
-
-
-
     #[Route("/tasks/{id}/edit", name:"task_edit")]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('TASK_EDIT')]
     public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
