@@ -1,13 +1,15 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\Tests;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * APP TODOLIST - BACKOFFICE DOCUMENTATION
+ */
 class AdminControllerTest extends WebTestCase
 {
-
     private $client;
     private $crawler;
 
@@ -37,28 +39,10 @@ class AdminControllerTest extends WebTestCase
         $this->crawler = $this->client->request($method, $url);
     }
 
-    /**
-     * Login as Admin
-     *
-     * @return void
-     */
-    public function logAsAdmin()
-    {
-        $this->getCrawler('GET', '/login');
-
-        $this->crawler->selectButton('Login');
-        $form = $this->crawler->form([
-            'email'=>'test@gmail.com',
-            'password'=> 'identique'
-        ]);
-        //Nouvelle requete
-        $this->client->submit($form);
-
-        $crawler = $this->client->followRedirect();
-
-    }
-
-    //index
+    // =======================================================================
+    // Tests Index page + variations.
+    // ======================================================================= 
+    // 1 - Expected: 200 with Admin logged.
     public function testIndexAdminNotLogged(): void
     {
         $this->getCrawler('GET', '/admin');
@@ -68,6 +52,7 @@ class AdminControllerTest extends WebTestCase
 
     }
 
+    // 1 - Expected: 200 with User logged and Redirection
 
     public function tesIndexAdminLogged(): void
     {
@@ -93,11 +78,6 @@ class AdminControllerTest extends WebTestCase
         $this->getCrawler('GET', '/tasks/create');
     }
 
-
-
-
-//editAction
 //showAction
-
 
 }

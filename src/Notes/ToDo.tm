@@ -32,21 +32,25 @@ Modifications
 
 [90%] Fixtures users account and tasks (server test)
 
-[] fixe issue form checkbox
+[] Form - fixe issue form checkbox
 [X] Crud user ds Admin (reecriture name)
 [X] Ajouter des titres de pages. <h1>
-[] Documentation Audit
-[] deleteTaskAction() ajouter un voter (author) event
-
-Tests:
-[]Load fixture tests
-[compris] Model Assertion (Response)
-[compris] Model Assertion (Form)
+[check] deleteTaskAction() CRUD de task ajouter un voter (author) event
 
 Pages Admin
 [X] /admin mettre template
 
-[]Documentation technique concernant l’implémentation de l’authentification (fichier au format PDF)
+======================================
+Tests:
+[check] Fixtures
+[check]Load fixture environement test
+[compris] Model Assertion (Response)
+[compris] Model Assertion (Form)
+======================================
+
+
+[] Documentation Audit
+[] Documentation technique concernant l’implémentation de l’authentification (fichier au format PDF)
 
 :competences
 Produire un rapport de l’exécution des tests

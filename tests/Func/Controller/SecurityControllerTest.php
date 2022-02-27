@@ -6,16 +6,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Test credentials 
+ * APP TODOLIST - SECURITY DOCUMENTATION
  */
 class SecurityControllerTest extends WebTestCase
 {
-
-    //setup()
     private $client;
     private $crawler;
     private $id = 1;
     
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+        $this->id = 1; //utilisateur connecte (user ou admin)
+    }
+
     /**
      * The request() method returns a Symfony\Component\DomCrawler\Crawler 
      * object which can be used to select elements in the response.
@@ -32,8 +36,10 @@ class SecurityControllerTest extends WebTestCase
         $this->crawler = $client->request($method, $url);
     }
 
-
-    //Refactoring 
+    // =======================================================================
+    // LOGIN AS USER  + variations.
+    // ======================================================================= 
+    // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
     public function testLoginWithRighCredentials($password = 'identique')
     {
         $this->getCrawler('GET', '/login');
@@ -54,6 +60,7 @@ class SecurityControllerTest extends WebTestCase
 
     }
 
+    // 2 - Expected:   with User ['ROLE_USER'] Bad Credentials.
     public function testLoginWithBadPassword()
     {
         $this->testLoginWithRighCredentials('badPassword');
@@ -67,6 +74,48 @@ class SecurityControllerTest extends WebTestCase
 
     }
 
+    // ======================================================================= 
+    // LOGIN AS ADMIN + variations.
+    // ======================================================================= 
+    // 1 - Expected: 200 with User ['ROLE_ADMIN']
+    public function logAsAdmin()
+    {
+        $this->getCrawler('GET', '/login');
+
+        $this->crawler->selectButton('Login');
+        $form = $this->crawler->form([
+            'email'=>'test@gmail.com',
+            'password'=> 'identique'
+        ]);
+        //Nouvelle requete
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+    }
+
+    // 2 - Expected: 200 Unauthorized with bad credential.
+    public function logAsAdminWithBadCredential()
+    {
+        $this->getCrawler('GET', '/login');
+
+        $this->crawler->selectButton('Login');
+        $form = $this->crawler->form([
+            'email'=>'test@gmail.com',
+            'password'=> 'identique'
+        ]);
+        //Nouvelle requete
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+
+    }
+
+    // =======================================================================
+    // LOGOUT + variations.
+    // =======================================================================
+
+    // 1 - Expected: 200 with User ['ROLE_ADMIN']
       public function testLogout()
     {
         $this->getCrawler('GET', '/logout');

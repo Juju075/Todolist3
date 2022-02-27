@@ -4,12 +4,14 @@ namespace App\Security\Voter;
 
 use App\Entity\Task;
 use App\Entity\User;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
  * C le système qui gère les permissions d’accès aux différents éléments de l’app.
+ * return true ou false
  */
 class TaskVoter extends Voter
 {
@@ -17,9 +19,13 @@ class TaskVoter extends Voter
     public const EDIT = 'TASK_EDIT';
     public const TOGGLE = 'TASK_TOGGLE';
 
-    public $author = null;
-    
-    
+    private $security;
+
+    // Security -> Permissions utilisateurs. (ROLES)
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
     
     protected function supports(string $attribute, $task): bool
     {
@@ -31,6 +37,11 @@ class TaskVoter extends Voter
     protected function voteOnAttribute(string $attribute, $task, TokenInterface $token): bool
     {
         $user = $token->getUser();
+
+        //On verifie si l'user est Admin
+        if ($this->security->isGranted('ROLE_ADMIN')) {
+            return true;
+        }
 
         //Ci dessous nouvelle contrainte (false)  
 
@@ -63,7 +74,7 @@ class TaskVoter extends Voter
     }
 
     //On separe la logique du switch pour facilier la maintenance du code.
-    //On verifie si l'user est le proprietaire
+    //Authorisation: Si l'utilisateur est le proprietaire.
     private function userCanDelete(Task $task, User $user)
     {
         return $user === $task->getUser();

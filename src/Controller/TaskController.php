@@ -44,10 +44,6 @@ class TaskController extends AbstractController
         return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
     }
 
-
-
-
-
     #[Route("/tasks/create", name: "task_create")]
     #[IsGranted('ROLE_USER')]
     public function createAction(Request $request)
@@ -68,7 +64,6 @@ class TaskController extends AbstractController
 
         return $this->renderForm('task/create.html.twig', ['form'=> $form,]);
     }
-
 
     #[Route("/tasks/{id}/edit", name:"task_edit")]
     #[IsGranted('TASK_EDIT')]
@@ -99,7 +94,6 @@ class TaskController extends AbstractController
 
         return $this->redirectToRoute('task_list');
     }
-
 
     // etre proprietaire pour delete 
     #[Route("/tasks/{id}/delete", name: "task_delete")]
