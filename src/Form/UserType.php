@@ -28,15 +28,16 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, ['label' => 'Adresse email'])
 
             // <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-        
-            //1 => 'ROLE_USER',
-            //2 => 'ROLE_ADMIN'
 
-            ->add('roles', CheckboxType::class, [
-                'label'    => 'role',
-                'value'    => [0 => 'ROLE_USER', 1 => 'ROLE_ADMIN'],
-                'required' => true,
-            ])
+            //Errror: Unable to transform value for property path "roles": Expected a Boolean.  
+
+            //This should always be used for a field that has a boolean value: if the box is checked, 
+            //the field will be set to true, if the box is unchecked, the value will be set to false  
+
+            // ->add('roles', CheckboxType::class, [
+            //     'label'    => 'Select for Admin.',
+            //     'required' => false,
+            // ])
             ;
     }
 

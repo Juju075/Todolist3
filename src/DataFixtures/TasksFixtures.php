@@ -14,20 +14,21 @@ class TasksFixtures extends Fixture
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        //Tasks role_users
-        for ($nbUser=1; $nbUser <3 ; $nbUser++) { 
+        //User 0 it's Admin user_admin_0
+        for ($nbUser = 1; $nbUser <3 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
 
             for ($nbTask=0; $nbTask < rand(3, 12) ; $nbTask++) { 
-            $task = (new Task())
-            ->setTitle($faker->title())
-            ->setContent($faker->content())
-            ->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'))
-            ;
+            $task = new Task();
+            $task->setTitle($faker->title());
+            $task->setContent($faker->content());
+            $task->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'));
             
             $user->addTask($task);
+            $manager->persist($task);
             }
         }
+        $manager->flush();
     }
 
     public function getDependencies() : array

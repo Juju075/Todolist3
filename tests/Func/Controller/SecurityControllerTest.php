@@ -2,6 +2,7 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
+use App\Tests\Traits\Initialization;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -10,44 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class SecurityControllerTest extends WebTestCase
 {
-    private $client;
-    private $crawler;
-    private $id = 1;
-    
-    public function setUp(): void
-    {
-        $this->client = static::createClient();
-        $this->id = 1; //utilisateur connecte (user ou admin)
-    }
-
-    /**
-     * The request() method returns a Symfony\Component\DomCrawler\Crawler 
-     * object which can be used to select elements in the response.
-     *
-     * @param string $method
-     * @param string $url
-     * @return void
-     */
-    public function getCrawler(string $method, string $url): void
-    {
-        $client = static::createClient();
-
-        $this->client = $client;
-        $this->crawler = $client->request($method, $url);
-    }
+    use Initialization;
 
     // =======================================================================
     // LOGIN AS USER  + variations.
     // ======================================================================= 
     // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
-    public function testLoginWithRighCredentials($password = 'identique')
+    public function testLoginWithRighCredentials()
     {
         $this->getCrawler('GET', '/login');
 
         $this->crawler->selectButton('Login');
         $form = $this->crawler->form([
             'email'=>'test@gmail.com',
-            'password'=> $password
+            'password'=> 'identique'
         ]);
         //Nouvelle requete
         $this->client->submit($form);
@@ -63,7 +40,17 @@ class SecurityControllerTest extends WebTestCase
     // 2 - Expected:   with User ['ROLE_USER'] Bad Credentials.
     public function testLoginWithBadPassword()
     {
-        $this->testLoginWithRighCredentials('badPassword');
+        $this->getCrawler('GET', '/login');
+
+        $this->crawler->selectButton('Login');
+        $form = $this->crawler->form([
+            'email'=>'test@gmail.com',
+            'password'=> 'identique'
+        ]);
+        //Nouvelle requete
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         //message
@@ -71,7 +58,17 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLoginWithBadUsername()
     {
+        $this->getCrawler('GET', '/login');
 
+        $this->crawler->selectButton('Login');
+        $form = $this->crawler->form([
+            'email'=>'wrong@gmail.com',
+            'password'=> 'identique'
+        ]);
+        //Nouvelle requete
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
     }
 
     // ======================================================================= 

@@ -26,22 +26,24 @@ class UsersFixtures extends Fixture
             
             $user = new User();
             
-            if ($user === 0) {
-                    $user->setUsername('admin');
-                    $user->setEmail($faker->email());
-                    $user->setRoles(['ROLE_ADMIN']);
-                    $user->setPassword('identique');
-                ;
-                $this->addReference('user_admin_'.$nbUser,$user);
+            if ($nbUser === 0) {
+                $user->setUsername('admin');
+                $user->setEmail($faker->email());
+                $user->setRoles(['ROLE_ADMIN']);
+                $user->setPassword('identique');
+                $var = $this->addReference('user_admin_'.$nbUser,$user);
                 $manager->persist($user);
+                echo($var);
+
             }
             $user->setUsername($faker->username());
             $user->setEmail($faker->email($faker->email()));
             $user->setRoles(['ROLE_USER']);
             $user->setPassword('identique');
             ;
-            $this->addReference('user_'.$nbUser,$user);
+            $var1 = $this->addReference('user_'.$nbUser,$user);
             $manager->persist($user);
+            echo($var);
         }
         $manager->flush();
     }

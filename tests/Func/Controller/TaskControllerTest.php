@@ -2,45 +2,16 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
+use App\Tests\Traits\Initialization;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * APP TODOLIST - FONCTIONNALITIES DOCUMENTATION
+ * APP TODOLIST - FONCTIONALITIES DOCUMENTATION
  */
 class TaskControllerTest extends WebTestCase
 {
-    private $client;
-    private $crawler;
-    private $id;
-
-    //echo $client->getResponse()->getContent();
-
-    public function setUp(): void
-    {
-        $this->client = static::createClient();
-        $this->id = 1; //utilisateur connecte (user ou admin)
-    }
-
-    public function tearDown(): void
-    {
-        $this->client = null;
-        $this->id = null;
-        $this->crawler = null;
-    }
-
-    /**
-     * The request() method returns a Symfony\Component\DomCrawler\Crawler 
-     * object which can be used to select elements in the response.
-     *
-     * @param string $method
-     * @param string $url
-     * @return void
-     */
-    public function getCrawler(string $method, string $url): void
-    {
-        $this->crawler = $this->client->request($method, $url);
-    }
+    use Initialization;
 
     // =======================================================================
     // Tests Login + variations.

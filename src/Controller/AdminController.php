@@ -56,6 +56,12 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
+
+            dd($request); // true 
+            if ('$checkbox' === true) {
+                $user->setRoles(['ROLE_ADMIN']);
+            }
+
             $this->em->persist($user);
             $this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été ajouté.');
