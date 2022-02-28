@@ -44,6 +44,7 @@ class UsersFixtures extends Fixture
             $var1 = $this->addReference('user_'.$nbUser,$user);
             $manager->persist($user);
             echo($var);
+            
         }
         $manager->flush();
     }
