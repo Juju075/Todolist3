@@ -9,9 +9,6 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class TasksFixtures extends Fixture
 {
-    private $nombre = [0,1,2,3];
-
-    //Terminal server de test (doctrine:fixtures:load --env=test)
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');

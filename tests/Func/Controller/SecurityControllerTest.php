@@ -11,7 +11,36 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class SecurityControllerTest extends WebTestCase
 {
-    use Initialization;
+    //use Initialization;
+
+    private $client;
+    private $crawler;
+    private $id = 1;
+    
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+        $this->id = 1; //utilisateur connecte (user ou admin)
+    }
+
+    /**
+     * The request() method returns a Symfony\Component\DomCrawler\Crawler 
+     * object which can be used to select elements in the response.
+     *
+     * @param string $method
+     * @param string $url
+     * @return void
+     */
+    public function getCrawler(string $method, string $url): void
+    {
+        $client = static::createClient();
+
+        $this->client = $client;
+        $this->crawler = $client->request($method, $url);
+    }
+
+
+
 
     // =======================================================================
     // LOGIN AS USER  + variations.
@@ -19,11 +48,14 @@ class SecurityControllerTest extends WebTestCase
     // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
     public function testLoginWithRighCredentials()
     {
-        $this->getCrawler('GET', '/login');
+        //$this->getCrawler('GET', '/login');
 
+        $client = static::createClient();
+        $crawler = $client->request('GET', 'login');
         $this->crawler->selectButton('Login');
+
         $form = $this->crawler->form([
-            'email'=>'test@gmail.com',
+            'email'=>'marianne34@hotmail.fr',
             'password'=> 'identique'
         ]);
         //Nouvelle requete
