@@ -1,20 +1,19 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\DataFixtures;
-
 
 use Faker;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class UsersFixtures extends Fixture
+class UsersFixtures extends Fixture implements FixtureGroupInterface
 {
-
-    public function __construct(private UserPasswordHasherInterface $encoder) 
+    public function __construct(private UserPasswordHasherInterface $passwordHasher) 
     { 
-        $this->encoder = $encoder;
+        $this->passwordHasher = $passwordHasher;
     }
     
     //Terminal server de test (doctrine:fixtures:load --env=test)
@@ -25,27 +24,25 @@ class UsersFixtures extends Fixture
         for ($nbUser = 0; $nbUser < 4 ; $nbUser++) { 
             
             $user = new User();
-            
-            if ($nbUser === 0) {
-                $user->setUsername('admin');
-                $user->setEmail($faker->email());
-                $user->setRoles(['ROLE_ADMIN']);
-                $user->setPassword('identique');
-                $var = $this->addReference('user_admin_'.$nbUser,$user);
-                $manager->persist($user);
-                echo($var);
-
-            }
             $user->setUsername($faker->username());
             $user->setEmail($faker->email($faker->email()));
-            $user->setRoles(['ROLE_USER']);
-            $user->setPassword('identique');
-            ;
-            $var1 = $this->addReference('user_'.$nbUser,$user);
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
+            $var = $this->addReference('user_'.$nbUser,$user);
+            dump($var);
             $manager->persist($user);
-            echo($var);
-            
         }
         $manager->flush();
+    }
+
+    /**
+     * Implementation de FixtureGroupInterface
+     * C une methode static on y accede par UsersFixtures::getGroup();
+     * Avanage pas besoin d'instanciation.
+     *
+     * @return Array
+     */
+    public static function getGroups(): Array
+    {
+        return ['users'];
     }
 }

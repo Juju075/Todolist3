@@ -26,7 +26,11 @@
         <td>{{ user.email }}</td>
         <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         <td>
-          <a href="{{ path('app_admin_user_edit', { id: user.id }) }}">edit</a>
+          <button class="btn btn-success pull-right" type="button">
+            <a href="{{ path('app_admin_user_edit', { id: user.id }) }}"
+              >edit</a
+            >
+          </button>
         </td>
       </tr>
       {% else %}

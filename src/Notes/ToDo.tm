@@ -27,28 +27,32 @@ Modifications
 [X] task delete |ne peuvent être supprimées que par les utilisateurs ayant créé cette tâche.
 [] task delete (qui est anonyme?) | Les tâches li" a user “anonyme” seront supprimées uniquement par (ROLE_ADMIN).
 [X] user create (choice type) | ROLE_USER - ROLE_ADMIN 
-[check] user edit | Lors de la modification d’un utilisateur, il est également possible de changer le rôle d’un utilisateur.
-[a voir] (ou sont les pages de  gestion utilisateurs. )| Seuls (ROLE_ADMIN) pouront accéder aux pages de gestion des utilisateurs.
-
+[90%] user edit | Lors de la modification d’un utilisateur, il est également possible de changer le rôle d’un utilisateur.
+[X] (ou sont les pages de  gestion utilisateurs. )| Seuls (ROLE_ADMIN) pouront accéder aux pages de gestion des utilisateurs.
 [90%] Fixtures users account and tasks (server test)
 
 [] Form - fixe issue form checkbox
 [X] Crud user ds Admin (reecriture name)
 [X] Ajouter des titres de pages. <h1>
-[check] deleteTaskAction() CRUD de task ajouter un voter (author) event
-
+[90%] deleteTaskAction() CRUD de task ajouter un voter (author) event Redirection si false
+[check] Ajouter eventsubscriber pour gerer les exeptions 403 Forbidden
 Pages Admin
-[X] /admin mettre template
+[X] /admin mettre template Index et List user Edit
+
+[X]PhpmyAdmin latest
+[]Xdebug
 
 ======================================
 Tests:
-[check] Fixtures
-[check]Load fixture environement test
-[compris] Model Assertion (Response)
-[compris] Model Assertion (Form)
+[90%] UsersFixture.php | Pb addReference (pas de dump pour corriger)
+[90%] TaskFixture.php | Pb getReference (pas de dump pour corriger)
+[X]Load fixture environement test et update schema 
+[] load test sur env=test ?
+
+[compris] Entite - Model Assertion (Response)  
+[compris] Controller - Model Assertion (Response) List -
+[compris] Controller - Model Assertion (Form) Login - Create - Edit
 ======================================
-
-
 [] Documentation Audit
 [] Documentation technique concernant l’implémentation de l’authentification (fichier au format PDF)
 

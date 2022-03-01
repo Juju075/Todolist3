@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\User;
@@ -65,7 +65,7 @@ class AdminController extends AbstractController
             $this->em->persist($user);
             $this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été ajouté.');
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('app_admin_users_list');
         }
 
         return $this->render('admin/create.html.twig', ['form' => $form->createView()]);
@@ -83,7 +83,7 @@ class AdminController extends AbstractController
             $user->setPassword($password);
             $this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été modifié');
-            return $this->redirectToRoute('user_list');
+            return $this->redirectToRoute('app_admin_users_list');
         }    
         return $this->render('admin/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }    

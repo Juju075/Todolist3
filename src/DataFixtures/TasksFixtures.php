@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace App\DataFixtures;
 
 use Faker;
@@ -9,15 +9,18 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class TasksFixtures extends Fixture
 {
+    private $nombre = [0,1,2,3];
+
     //Terminal server de test (doctrine:fixtures:load --env=test)
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
+        
 
         //User 0 it's Admin user_admin_0
         for ($nbUser = 1; $nbUser <3 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
-
+            
             for ($nbTask=0; $nbTask < rand(3, 12) ; $nbTask++) { 
             $task = new Task();
             $task->setTitle($faker->title());
@@ -37,5 +40,4 @@ class TasksFixtures extends Fixture
             UserFixtures::class,
         );
     }
-
 }

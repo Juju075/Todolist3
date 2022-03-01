@@ -3,7 +3,6 @@ declare(strict_types = 1);
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Entity\User;
 
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -45,7 +44,7 @@ class TaskController extends AbstractController
     }
 
     #[Route("/tasks/create", name: "task_create")]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_USER', statusCode: 403)]
     public function createAction(Request $request)
     {
         $task = new Task();
@@ -66,7 +65,7 @@ class TaskController extends AbstractController
     }
 
     #[Route("/tasks/{id}/edit", name:"task_edit")]
-    #[IsGranted('TASK_EDIT')]
+    #[IsGranted('TASK_EDIT', statusCode: 403)]
     public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
@@ -84,7 +83,7 @@ class TaskController extends AbstractController
 
 
     #[Route("/tasks/{id}/toggle", name: "task_toggle")]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('ROLE_USER', statusCode: 403)]
     public function toggleTaskAction(Task $task)
     {
         $task->toggle(!$task->isDone());
@@ -97,23 +96,18 @@ class TaskController extends AbstractController
 
     // etre proprietaire pour delete 
     #[Route("/tasks/{id}/delete", name: "task_delete")]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted('TASK_DELETE', statusCode: 403)]
     //voter event
     public function deleteTaskAction(Task $task)
     {
-        //|| $task->getUser === 'ROLE_ADMIN' 
-        if($this->getUser() === $task->getUser() ){
             $this->em->remove($task);
             $this->em->flush();
-    
             $this->addFlash('success', 'La tâche a bien été supprimée.');
-    
             return $this->redirectToRoute('task_list');
-        }
-            $this->addFlash('success', 'Vous devez etre l\'auteur de la task pour la supprimer.');
     }
 
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
+    #[IsGranted('TASK_TOGGLE', statusCode: 403)]
     //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     public function allIsdoneTask(TaskRepository $taskRepo) 
     {
