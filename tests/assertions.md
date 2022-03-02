@@ -103,6 +103,10 @@ eg: assertSame(mixed $expected, mixed $actual[, string $message = ''])
 
 ---
 
+assertSelectorTextContains()
+
+---
+
 eg:assertInstanceOf($expected, $actual[, $message = ''])
 
 - a_InstanceOf | si $actual n’est pas une instance de $expected

@@ -11,7 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class AdminControllerTest extends WebTestCase
 {
-    use Initialization;
+    //use Initialization;
+    private $client;
+    
+    public function setUp(): void
+    {
+        $this->client = static::createClient();
+    }
+
+    public function tearDown(): void
+    {
+        $this->client = null;
+    }
+
+
 
     // =======================================================================
     // Tests BackOffice pages. [Not implemented]
@@ -24,7 +37,7 @@ class AdminControllerTest extends WebTestCase
     // 1 - Expected: 200 with Admin logged.
     public function testIndexAdminNotLogged(): void
     {
-        $this->getCrawler('GET', '/admin');
+        $crawler = $this->client->request('GET', '/admin');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
         $this->assertResponseRedirects('/login');
@@ -34,15 +47,20 @@ class AdminControllerTest extends WebTestCase
     // 2 - Expected: 200 with User logged and Redirection
     public function tesIndexAdminLogged(): void
     {
-        //Se connecter
-        $this->logAsAdmin();
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertSelectorTextContains('h1', 'text ici');
+        //Se connecter ['ROLE_ADMIN']
+        $crawler = $this->client->request('GET', 'login');
+        $crawler->selectButton('Sign in');
         
-        $this->getCrawler('GET', '/admin');
+        $form = $crawler->form([
+            'Email'=>'marianne34@hotmail.fr',
+            'Password'=> 'identique'
+        ]);
         
+        //Requete
+        $crawler = $this->client->request('GET', '/admin');
+
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertSelectorTextContains('h1', 'text ici');
+        $this->assertSelectorTextContains('h1', 'Admin index');
     }
     
     public function testListAction(): void
@@ -65,7 +83,7 @@ class AdminControllerTest extends WebTestCase
     // 1 - Expected: 
     public function testCreateAction(): void
     {
-        $this->getCrawler('GET', '/tasks/create');
+        $crawler = $this->client->request('GET', '/admin');
     }
 
     // ----------------------------------------------------------------------

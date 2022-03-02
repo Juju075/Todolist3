@@ -2,68 +2,64 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
-use App\Tests\Traits\Initialization;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * APP TODOLIST - SECURITY DOCUMENTATION
+ * Sur quel bdd 
  */
 class SecurityControllerTest extends WebTestCase
 {
-    //use Initialization;
-
     private $client;
-    private $crawler;
-    private $id = 1;
     
     public function setUp(): void
     {
         $this->client = static::createClient();
-        $this->id = 1; //utilisateur connecte (user ou admin)
     }
 
-    /**
-     * The request() method returns a Symfony\Component\DomCrawler\Crawler 
-     * object which can be used to select elements in the response.
-     *
-     * @param string $method
-     * @param string $url
-     * @return void
-     */
-    public function getCrawler(string $method, string $url): void
+    public function tearDown(): void
     {
-        $client = static::createClient();
-
-        $this->client = $client;
-        $this->crawler = $client->request($method, $url);
+        $this->client = null;
     }
-
-
-
 
     // =======================================================================
-    // LOGIN AS USER  + variations.
+    // LOGIN AS USER  + variations. | Email & Password - Label & Input
     // ======================================================================= 
     // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
     public function testLoginWithRighCredentials()
     {
-        //$this->getCrawler('GET', '/login');
 
-        $client = static::createClient();
-        $crawler = $client->request('GET', 'login');
-        $this->crawler->selectButton('Login');
+        $crawler = $this->client->request('GET', 'login');
 
-        $form = $this->crawler->form([
-            'email'=>'marianne34@hotmail.fr',
-            'password'=> 'identique'
+        //Assertion - [Verification des elements du formulaire.]
+
+        
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        //Source html : <label for="inputEmail">Email</label>
+        //Source html : <label for="inputPassword">Password</label>
+        
+        //Source html : <input type="email" value="" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus />
+        $this->assertEquals(1, $crawler->filter('input[name="email"]')->count());
+        //Source html : <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required />
+        $this->assertEquals(1, $crawler->filter('input[name="password"]')->count());
+        $this->assertEquals(1, $crawler->filter('input[name="_csrf_token"]')->count());
+
+        $crawler->selectButton('Sign in');
+        
+        $form = $crawler->form([
+            'Email'=>'marianne34@hotmail.fr',
+            'Password'=> 'identique'
         ]);
+        
         //Nouvelle requete
         $this->client->submit($form);
+        echo $this->client->getResponse()->getContent();
 
         $crawler = $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        //
         //message success
         //$this->assertSame('Se déconnecter', $crawler->filter('a.pull-right.btn.btn-danger')->text());
 
@@ -72,72 +68,38 @@ class SecurityControllerTest extends WebTestCase
     // 2 - Expected:   with User ['ROLE_USER'] Bad Credentials.
     public function testLoginWithBadPassword()
     {
-        $this->getCrawler('GET', '/login');
-
-        $this->crawler->selectButton('Login');
-        $form = $this->crawler->form([
-            'email'=>'test@gmail.com',
-            'password'=> 'identique'
+        $crawler = $this->client->request('GET', 'login');
+        $crawler->selectButton('Sign in');
+        
+        $form = $crawler->form([
+            'Email'=>'marianne34@hotmail.fr',
+            'Password'=> 'identiqdudde'
         ]);
+        
         //Nouvelle requete
         $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        //message
+        //Message d'erreur Invalid credentials. <div class="alert alert-danger">Invalid credentials.</div>
+        $this->assertSame('Invalid credentials.', $crawler->filter('alert alert-danger')->text());
     }
 
     public function testLoginWithBadUsername()
     {
-        $this->getCrawler('GET', '/login');
-
-        $this->crawler->selectButton('Login');
-        $form = $this->crawler->form([
-            'email'=>'wrong@gmail.com',
-            'password'=> 'identique'
+        $crawler = $this->client->request('GET', 'login');
+        $crawler->selectButton('Sign in');
+        
+        $form = $crawler->form([
+            'Email'=>'marianne34@hotmaiddddl.fr',
+            'Password'=> 'identique'
         ]);
+        
         //Nouvelle requete
         $this->client->submit($form);
 
         $crawler = $this->client->followRedirect();
-    }
-
-    // ======================================================================= 
-    // LOGIN AS ADMIN + variations.
-    // ======================================================================= 
-    // 1 - Expected: 200 with User ['ROLE_ADMIN']
-    public function logAsAdmin()
-    {
-        $this->getCrawler('GET', '/login');
-
-        $this->crawler->selectButton('Login');
-        $form = $this->crawler->form([
-            'email'=>'test@gmail.com',
-            'password'=> 'identique'
-        ]);
-        //Nouvelle requete
-        $this->client->submit($form);
-
-        $crawler = $this->client->followRedirect();
-
-    }
-
-    // 2 - Expected: 200 Unauthorized with bad credential.
-    public function logAsAdminWithBadCredential()
-    {
-        $this->getCrawler('GET', '/login');
-
-        $this->crawler->selectButton('Login');
-        $form = $this->crawler->form([
-            'email'=>'test@gmail.com',
-            'password'=> 'identique'
-        ]);
-        //Nouvelle requete
-        $this->client->submit($form);
-
-        $crawler = $this->client->followRedirect();
-
     }
 
     // =======================================================================
@@ -146,10 +108,10 @@ class SecurityControllerTest extends WebTestCase
 
     // 1 - Expected: 200 with User ['ROLE_ADMIN']
       public function testLogout()
-    {
-        $this->getCrawler('GET', '/logout');
-
+      {
+        $crawler = $this->client->request('GET', 'logout');
+   
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
         $this->assertSelectorTextContains();
-    }
+      }
 }

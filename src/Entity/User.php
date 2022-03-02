@@ -16,6 +16,14 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    /**
+     * pour la checkbox 0 ou 1
+     */
+    const ROLE = [
+        0 => 'ROLE_USER',
+        1 => 'ROLE_ADMIN'
+    ];
+
     use Timestampable;      
 
     #[ORM\Id]

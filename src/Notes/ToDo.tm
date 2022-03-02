@@ -27,6 +27,7 @@ Modifications
 [X] task delete |ne peuvent être supprimées que par les utilisateurs ayant créé cette tâche.
 [] task delete (qui est anonyme?) | Les tâches li" a user “anonyme” seront supprimées uniquement par (ROLE_ADMIN).
 [X] user create (choice type) | ROLE_USER - ROLE_ADMIN 
+[] Implementre une redirection si Access Denied - Annotation
 [90%] user edit | Lors de la modification d’un utilisateur, il est également possible de changer le rôle d’un utilisateur.
 [X] (ou sont les pages de  gestion utilisateurs. )| Seuls (ROLE_ADMIN) pouront accéder aux pages de gestion des utilisateurs.
 [90%] Fixtures users account and tasks (server test)
