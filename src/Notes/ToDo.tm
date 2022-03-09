@@ -10,7 +10,7 @@ User < > Task
 
 Modifications
 
-[] en entre déjà connecté defaultcontroller  index
+[X] en entre déjà connecté defaultcontroller  index
 [X] Logout 
 [X] Login | 
 [X] Create User (identique) - na pas enregistre le role par default
@@ -20,23 +20,28 @@ Modifications
 [X] Toogle Task
 [X] check all terminated tasks
 
-[] Corriger les erreurs d'Annotations Assert
-[] Pb annotation timestampable
+[X] Corriger les erreurs d'Annotations Assert
+[X] Pb annotation timestampable
 
 
 [X] task delete |ne peuvent être supprimées que par les utilisateurs ayant créé cette tâche.
-[] task delete (qui est anonyme?) | Les tâches li" a user “anonyme” seront supprimées uniquement par (ROLE_ADMIN).
+[] task delete (qui est anonyme?) | Les tâches lie“anonyme” seront supprimées uniquement par (ROLE_ADMIN).
 [X] user create (choice type) | ROLE_USER - ROLE_ADMIN 
+
 [] Implementre une redirection si Access Denied - Annotation
+
 [90%] user edit | Lors de la modification d’un utilisateur, il est également possible de changer le rôle d’un utilisateur.
 [X] (ou sont les pages de  gestion utilisateurs. )| Seuls (ROLE_ADMIN) pouront accéder aux pages de gestion des utilisateurs.
+
+
 [90%] Fixtures users account and tasks (server test)
 
-[] Form - fixe issue form checkbox
+[X] Form - fixe issue form checkbox choicetyupe
 [X] Crud user ds Admin (reecriture name)
 [X] Ajouter des titres de pages. <h1>
 [90%] deleteTaskAction() CRUD de task ajouter un voter (author) event Redirection si false
-[check] Ajouter eventsubscriber pour gerer les exeptions 403 Forbidden
+[90%] Ajouter eventsubscriber pour gerer les exeptions 403 Forbidden Json > Response()
+[]Activer EvenSubscriber fin de projet.
 Pages Admin
 [X] /admin mettre template Index et List user Edit
 

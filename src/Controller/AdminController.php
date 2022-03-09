@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,14 +56,17 @@ class AdminController extends AbstractController
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            dd($request); // true 
-            if ('$checkbox' === true) {
-                $user->setRoles(['ROLE_ADMIN']);
-            }
+            dd($form); // true 
 
+            if ('$ChoiceType' === true) {
+                $user->setRoles(['ROLE_ADMIN']);
+            }else{
+                $user->setRoles(['ROLE_USER']);
+            }
+!       
             $this->em->persist($user);
             $this->em->flush();
-            $this->addFlash('success', 'L\'utilisateur a bien été ajouté.');
+            $this->addFlash('success', 'New User has been added.');
             return $this->redirectToRoute('app_admin_users_list');
         }
 

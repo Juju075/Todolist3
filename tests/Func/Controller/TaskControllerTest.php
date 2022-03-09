@@ -2,6 +2,7 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
+use App\Tests\Traits\LoginAsAdminOrUser;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -10,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class TaskControllerTest extends WebTestCase
 {
+    use LoginAsAdminOrUser;
+
     private $client;
     
     public function setUp(): void
@@ -20,27 +23,6 @@ class TaskControllerTest extends WebTestCase
     public function tearDown(): void
     {
         $this->client = null;
-    }
-
-
-    // ----------------------------------------------------------------------
-    // LOGIN AS ADMIN: | Bdd empty Admin
-    // ----------------------------------------------------------------------
-    public function LoginAsAdmin(): void
-    {
-        $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('Se connecter')->form();
-        $this->client->submit($form, ['username' => 'admin', 'password' => 'identique']);
-    }
-
-    // ----------------------------------------------------------------------
-    // LOGIN AS USER: | Credentials suzanne43@sfr.fr  identique
-    // ----------------------------------------------------------------------
-    public function LoginAsUser(): void
-    {
-        $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('Se connecter')->form();
-        $this->client->submit($form, ['username' => 'suzanne43@sfr.fr', 'password' => 'identique']);
     }
 
 
@@ -87,8 +69,10 @@ class TaskControllerTest extends WebTestCase
 
         //Soumission > VOIR DOCUMENTATION
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['task[title]'] = 'Test Super titre de tache';
-        $form['task[content]'] = 'Test Contenu de la supertache blablabla.';
+
+        $form['task[title]'] = 'New Task title for funcional testing.';
+        $form['task[content]'] = 'New Task content for funcional testing.';
+
         $this->client->submit($form);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -99,6 +83,7 @@ class TaskControllerTest extends WebTestCase
         //Page title must be <title></title>
 
         $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
+        //Flash
         $this->assertSelectorTextContains('title', 'text' );
     }
     
@@ -127,22 +112,25 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame('Content', $crawler->filter('label[for="task_content"]')->text());
         $this->assertEquals(1, $crawler->filter('textarea[name="task[content]"]')->count());
 
-        $form = $crawler->selectButton('Modifier')->form();
-        $form['task[title]'] = 'Test modification du Super titre de tache';
-        $form['task[content]'] = 'Test modification du contenu de la supertache blablabla.';
+        $form = $crawler->selectButton('Update')->form();
+
+        $form['task[title]'] = 'Here new title for functional testing.';
+        $form['task[content]'] = 'Here new content for functional testing.';
+
         $this->client->submit($form);
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $crawler = $this->client->followRedirect();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        //Flash
         $this->assertEquals(1, $crawler->filter('div.alert-success')->count());    
     }   
 
     // 2 - Expected: 200 OK with Admin.
 
-    // 3 - Expected: NO with unauthorized User.
+    // 3 - Expected: NO with unauthorized User. bg
 
     // ----------------------------------------------------------------------
     // DELETE ACTION.
@@ -150,7 +138,19 @@ class TaskControllerTest extends WebTestCase
     // 1 - Expected: 200 OK with authorized User.
     public function testDeleteTaskAction()
     {  
-        $this->assertResponseStatusCodeSame(Response::HTTP_OK);       
+        $this->LoginAsUser();
+
+        $id =21;
+        //$this->client->request('GET', '/tasks/2'. $id.'/delete');
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());    
+    
     }    
 
     // 2 - Expected: 200 OK with Admin.
@@ -158,12 +158,22 @@ class TaskControllerTest extends WebTestCase
     // 3 - Expected: NO with unauthorized Use.
 
     // ----------------------------------------------------------------------
-    // TOOGLE ACTION + variations.
+    // TOOGLE ACTION.
     // ----------------------------------------------------------------------
     // 1 - 
     public function testToggleTaskAction(): void
     {
+        $this->LoginAsUser();
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);     
+  
+        $this->client->request('GET', '/tasks/1/toggle');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+
+        $crawler = $this->client->followRedirect();
+
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK); 
+        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
+
     }
 
     // =======================================================================

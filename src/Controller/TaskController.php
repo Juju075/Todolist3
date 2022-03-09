@@ -44,7 +44,9 @@ class TaskController extends AbstractController
     }
 
     #[Route("/tasks/create", name: "task_create")]
-    #[IsGranted('ROLE_USER', statusCode: 403)]
+    #[IsGranted('ROLE_USER', subject: 'task')]
+    // #[Security("is_granted('ROLE_USER', task)", statusCode: 404, message: 'Resource not found.')]
+
     public function createAction(Request $request)
     {
         $task = new Task();
@@ -56,7 +58,7 @@ class TaskController extends AbstractController
             $this->em->persist($task);
             $this->em->flush();
 
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', 'New Task it done.');
 
             return $this->redirectToRoute('task_list');
         }
@@ -65,7 +67,7 @@ class TaskController extends AbstractController
     }
 
     #[Route("/tasks/{id}/edit", name:"task_edit")]
-    #[IsGranted('TASK_EDIT', statusCode: 403)]
+    #[IsGranted('TASK_EDIT', subject: 'task',statusCode: 403)]
     public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
@@ -73,7 +75,7 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()){
             $this->em->flush();
-            $this->addFlash('success', 'La tâche a bien été modifiée.');
+            $this->addFlash('success', 'Task has been updated.');
 
             return $this->redirectToRoute('task_list');
         }
@@ -83,31 +85,30 @@ class TaskController extends AbstractController
 
 
     #[Route("/tasks/{id}/toggle", name: "task_toggle")]
-    #[IsGranted('ROLE_USER', statusCode: 403)]
+    #[IsGranted('ROLE_USER', subject: 'task', statusCode: 403)]
     public function toggleTaskAction(Task $task)
     {
         $task->toggle(!$task->isDone());
         $this->em->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        $this->addFlash('success', sprintf('Task %s has been toogle.', $task->getTitle()));
 
         return $this->redirectToRoute('task_list');
     }
 
     // etre proprietaire pour delete 
     #[Route("/tasks/{id}/delete", name: "task_delete")]
-    #[IsGranted('TASK_DELETE', statusCode: 403)]
-    //voter event
+    #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTaskAction(Task $task)
     {
             $this->em->remove($task);
             $this->em->flush();
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            $this->addFlash('success', 'Task has been deleted.');
             return $this->redirectToRoute('task_list');
     }
 
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
-    #[IsGranted('TASK_TOGGLE', statusCode: 403)]
+    #[IsGranted('TASK_TOGGLE' , subject: 'task')]
     //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     public function allIsdoneTask(TaskRepository $taskRepo) 
     {

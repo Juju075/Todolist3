@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * Refactoriser.(découper le code plus claire donc + de tests.)
  */
-class TaskTest extends KernelTestCase
+class TaskEntityTest extends KernelTestCase
 {
 
     private Task $task;

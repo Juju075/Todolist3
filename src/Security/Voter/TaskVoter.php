@@ -50,8 +50,8 @@ class TaskVoter extends Voter
             return false;
         }
 
-        // 2- verifier si la task à un proprietaire
-        if (null === $task->getUsers()) {
+        // 2- verifier si la task est proprietaire
+        if (null === $task->getUser()) {
             return false;
         }
 
@@ -75,6 +75,7 @@ class TaskVoter extends Voter
 
     //On separe la logique du switch pour facilier la maintenance du code.
     //Authorisation: Si l'utilisateur est le proprietaire.
+    //verifie la fk qui lie les 2 entites.
     private function userCanDelete(Task $task, User $user)
     {
         return $user === $task->getUser();

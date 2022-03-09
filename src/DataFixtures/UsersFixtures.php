@@ -27,6 +27,7 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
             $user->setUsername($faker->username());
             $user->setEmail($faker->email($faker->email()));
             $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
+            $user->setRoles(['NON']); //$user->setRoles(['ROLE_USER']);
             $var = $this->addReference('user_'.$nbUser,$user);
             dump($var);
             $manager->persist($user);

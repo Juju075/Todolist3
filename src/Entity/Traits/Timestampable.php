@@ -1,24 +1,16 @@
 <?php
 declare(strict_types = 1);
 namespace App\Entity\Traits;
+use Doctrine\ORM\Mapping as ORM;
 
     trait Timestampable
     {
-        /**
-         * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-         */
-        
-        //#[ORM\Column(type: 'datetime', options: ['default': 'CURRENT_TIMESTAMP'])]
+        #[ORM\Column(type: 'datetime', options: ['default'=> 'CURRENT_TIMESTAMP'])]
         private $createdAt;
     
-        /**
-         * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
-         */
+        #[ORM\Column(type: 'datetime', options: ['default'=> 'CURRENT_TIMESTAMP'])]
         private $updatedAt;
 
-
-
-    
         public function getCreatedAt(): ?\DateTimeInterface
         {
             return $this->createdAt;

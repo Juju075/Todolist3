@@ -8,12 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class TasksFixtures extends Fixture
-{
+{ 
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
         
-
         //User 0 it's Admin user_admin_0
         for ($nbUser = 1; $nbUser <3 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);

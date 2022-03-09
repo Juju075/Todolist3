@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
@@ -17,27 +17,21 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class, ['label' => "Nom d'utilisateur"])
+            ->add('username', TextType::class, ['label' => "Username"])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Les deux mots de passe doivent correspondre.',
+                'invalid_message' => 'Both password must be the same.',
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Tapez le mot de passe à nouveau'],
+                'first_options'  => ['label' => 'Password'],
+                'second_options' => ['label' => 'Type your password'],
             ])
-            ->add('email', EmailType::class, ['label' => 'Adresse email'])
-
-            // <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-
-            //Errror: Unable to transform value for property path "roles": Expected a Boolean.  
-
-            //This should always be used for a field that has a boolean value: if the box is checked, 
-            //the field will be set to true, if the box is unchecked, the value will be set to false  
-
-            // ->add('roles', CheckboxType::class, [
-            //     'label'    => 'Select for Admin.',
-            //     'required' => false,
-            // ])
+            ->add('email', EmailType::class, ['label' => 'Email'])
+            ->add('roles', ChoiceType::class, [
+                'label'    => 'Select for Admin.',
+                'choices' =>['OUI' =>true, 'NON' =>false],
+                'required' => false,
+                'mapped' => false,
+            ])
             ;
     }
 

@@ -24,7 +24,7 @@ class SecurityControllerTest extends WebTestCase
     }
 
     // =======================================================================
-    // LOGIN AS USER  + variations. | Email & Password - Label & Input
+    // LOGIN AS USER  + variations. | Email & Password - Label & Input[name=" "]
     // ======================================================================= 
     // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
     public function testLoginWithRighCredentials()
@@ -34,8 +34,8 @@ class SecurityControllerTest extends WebTestCase
 
         //Assertion - [Verification des elements du formulaire.]
 
-        
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        
         //Source html : <label for="inputEmail">Email</label>
         //Source html : <label for="inputPassword">Password</label>
         
@@ -47,9 +47,11 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler->selectButton('Sign in');
         
+        //Source html : <label for="inputEmail">Email</label>
+        //Source html : <input type="email" value="suzanne43@sfr.fr" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus />
         $form = $crawler->form([
-            'Email'=>'marianne34@hotmail.fr',
-            'Password'=> 'identique'
+            'input[name="email"]'=>'marianne34@hotmail.fr',
+            'input[name="password"]'=> 'identique'
         ]);
         
         //Nouvelle requete
