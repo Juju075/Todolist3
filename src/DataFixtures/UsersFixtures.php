@@ -22,14 +22,26 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
         $faker = Faker\Factory::create('fr_FR');
 
         for ($nbUser = 0; $nbUser < 4 ; $nbUser++) { 
-            
+
+            //Set ADMIN account.
+            if ($nbUser = 0) {
+                dd($nbUser, 'admin');
             $user = new User();
             $user->setUsername($faker->username());
             $user->setEmail($faker->email($faker->email()));
             $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
             $user->setRoles(['NON']); //$user->setRoles(['ROLE_USER']);
             $var = $this->addReference('user_'.$nbUser,$user);
-            dump($var);
+            $manager->persist($user);
+            }
+
+            //endessous code correct
+            $user = new User();
+            $user->setUsername($faker->username());
+            $user->setEmail($faker->email($faker->email()));
+            $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
+            $user->setRoles(['NON']); //$user->setRoles(['ROLE_USER']);
+            $var = $this->addReference('user_'.$nbUser,$user);
             $manager->persist($user);
         }
         $manager->flush();
