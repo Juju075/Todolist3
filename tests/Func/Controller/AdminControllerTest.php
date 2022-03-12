@@ -18,6 +18,7 @@ class AdminControllerTest extends WebTestCase
     
     public function setUp(): void
     {
+        //Boot the kernel.
         $this->client = static::createClient();
     }
 

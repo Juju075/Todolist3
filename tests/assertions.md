@@ -4,6 +4,8 @@ https://phpunit.readthedocs.io/fr/latest/assertions.html
 
 Sorted by Groups
 
+Utilisation approprie
+
 ---
 
 TEST FAIL
@@ -11,6 +13,7 @@ SIGNALE UNE ERREUR identifiée par $message si...
 
 ---
 
+Usage:
 eg: assertArrayHasKey(mixed $key, array $array[, string $message = ''])
 
 - a_ArrayHasKey | si le tableau $array ne dispose pas de la clé $key
@@ -18,6 +21,7 @@ eg: assertArrayHasKey(mixed $key, array $array[, string $message = ''])
 
 ---
 
+Usage:
 eg: assertContains(mixed $needle, Iterator|array $haystack[, string $message = ''])
 
 - a_Contains | si $needle n’est pas un élément de $haystack.
@@ -31,6 +35,7 @@ eg: assertContains(mixed $needle, Iterator|array $haystack[, string $message = '
 
 ---
 
+Usage:
 eg: assertEquals(mixed $expected, mixed $actual[, string $message = ''])
 
 - a_Equals | si les deux variables $expected et $actual ne sont pas égales.
@@ -40,6 +45,7 @@ eg: assertEquals(mixed $expected, mixed $actual[, string $message = ''])
 
 ---
 
+Usage:
 eg: assertEmpty(mixed $actual[, string $message = ''])
 
 - a_Empty | si $actual n’est pas vide.
@@ -49,6 +55,7 @@ eg: assertEmpty(mixed $actual[, string $message = ''])
 
 ---
 
+Usage:
 eg: assertGreaterThan(mixed $expected, mixed $actual[, string $message = ''])
 
 - a_GreaterThan | si la valeur de $actual n’est pas plus élevée que la valeur de $expected.
@@ -62,10 +69,14 @@ eg: assertGreaterThan(mixed $expected, mixed $actual[, string $message = ''])
 
 ---
 
+Usage:
+
 - a_FileEquals
 - a_FileNotEquals
 
 ---
+
+Usage:
 
 - a_StringEqualsFile
 - a_StringNotEqualsFile
@@ -74,6 +85,7 @@ eg: assertGreaterThan(mixed $expected, mixed $actual[, string $message = ''])
 
 ---
 
+Usage:
 Constraints
 
 - a_True
@@ -83,6 +95,7 @@ Constraints
 
 ---
 
+Usage:
 eg: assertClassHasAttribute(string $attributeName, string $className[, string $message = ''])
 
 - a_ClassHasAttribute | si $className::attributeName n’existe pas.
@@ -94,6 +107,7 @@ eg: assertClassHasAttribute(string $attributeName, string $className[, string $m
 
 ---
 
+Usage:
 eg: assertSame(mixed $expected, mixed $actual[, string $message = ''])
 
 - a_Same | si les deux variables $expected et $actual ne sont pas du même type et n’ont pas la même valeur.
@@ -103,10 +117,12 @@ eg: assertSame(mixed $expected, mixed $actual[, string $message = ''])
 
 ---
 
+Usage:
 assertSelectorTextContains()
 
 ---
 
+Usage:
 eg:assertInstanceOf($expected, $actual[, $message = ''])
 
 - a_InstanceOf | si $actual n’est pas une instance de $expected
@@ -116,6 +132,7 @@ eg:assertInstanceOf($expected, $actual[, $message = ''])
 
 ---
 
+Usage:
 eg: assertInternalType($expected, $actual[, $message = ''])
 
 - a_InternalType | si $actual n’est pas du type $expected
@@ -129,6 +146,7 @@ eg: assertInternalType($expected, $actual[, $message = ''])
 
 ---
 
+Usage:
 eg: assertRegExp(string $pattern, string $string[, string $message = ''])
 
 - a_RegExp | si $string ne correspond pas a l’expression régulière
@@ -203,3 +221,21 @@ eg: assertRegExp(string $pattern, string $string[, string $message = ''])
 - stringStartsWith
 - stringContains
 - stringEndsWith
+
+=============================
+CRAWLER (DomCrawler)
+
+---
+
+FILTER (Nodefiltering)
+Toute les methods filter(node target)->methodName()
+
+->count()
+->text()
+
+FILTER (Nodetraversing)
+->first()
+
+Accessing Node Values
+->nodeName()
+->text()

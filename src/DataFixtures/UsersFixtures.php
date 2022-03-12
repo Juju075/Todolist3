@@ -16,32 +16,29 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
         $this->passwordHasher = $passwordHasher;
     }
     
-    //Terminal server de test (doctrine:fixtures:load --env=test)
+    //Terminal server de test (doctrine:fixtures:load --group=users --env=test)
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($nbUser = 0; $nbUser < 4 ; $nbUser++) { 
+        for ($nbUser = 1; $nbUser < 5 ; $nbUser++) { 
 
-            //Set ADMIN account.
-            if ($nbUser = 0) {
-                dd($nbUser, 'admin');
             $user = new User();
             $user->setUsername($faker->username());
-            $user->setEmail($faker->email($faker->email()));
             $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
-            $user->setRoles(['NON']); //$user->setRoles(['ROLE_USER']);
-            $var = $this->addReference('user_'.$nbUser,$user);
-            $manager->persist($user);
-            }
-
-            //endessous code correct
-            $user = new User();
-            $user->setUsername($faker->username());
             $user->setEmail($faker->email($faker->email()));
-            $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
-            $user->setRoles(['NON']); //$user->setRoles(['ROLE_USER']);
-            $var = $this->addReference('user_'.$nbUser,$user);
+            
+            //Overriding.
+            if ($nbUser === 1) {
+                $user->setRoles(['ROLE_ADMIN']); //$user->setRoles(['ROLE_ADMIN']); //<<<<
+            }elseif ($nbUser === 2) {
+                $user->setEmail('john.doe@testexample.com'); //<<<<
+                $user->setRoles(['ROLE_USER']); //$user->setRoles(['ROLE_USER']);
+            }else{
+                $user->setRoles(['ROLE_USER']); //$user->setRoles(['ROLE_USER']);
+            }    
+                    
+            $this->addReference('user_'.$nbUser,$user);
             $manager->persist($user);
         }
         $manager->flush();

@@ -68,12 +68,12 @@ class TaskControllerTest extends WebTestCase
 
 
         //Soumission > VOIR DOCUMENTATION
-        $form = $crawler->selectButton('Ajouter')->form();
+        $formObjet = $crawler->selectButton('Ajouter')->form();
 
-        $form['task[title]'] = 'New Task title for funcional testing.';
-        $form['task[content]'] = 'New Task content for funcional testing.';
+        $formObjet['task[title]'] = 'New Task title for funcional testing.';
+        $formObjet['task[content]'] = 'New Task content for funcional testing.';
 
-        $this->client->submit($form);
+        $this->client->submit($formObjet);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
@@ -112,12 +112,12 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame('Content', $crawler->filter('label[for="task_content"]')->text());
         $this->assertEquals(1, $crawler->filter('textarea[name="task[content]"]')->count());
 
-        $form = $crawler->selectButton('Update')->form();
+        $formObjet = $crawler->selectButton('Update')->form();
 
-        $form['task[title]'] = 'Here new title for functional testing.';
-        $form['task[content]'] = 'Here new content for functional testing.';
+        $formObjet['task[title]'] = 'Here new title for functional testing.';
+        $formObjet['task[content]'] = 'Here new content for functional testing.';
 
-        $this->client->submit($form);
+        $this->client->submit($formObjet);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 

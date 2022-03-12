@@ -21,7 +21,8 @@ Trait LoginAsAdminOrUser
     public function LoginAsUser(): void
     {
         $crawler = $this->client->request('GET', '/login');
-        $form = $crawler->selectButton('Se connecter')->form();
-        $this->client->submit($form, ['email' => 'suzanne43@sfr.fr', 'password' => 'identique']);
+        $formObject = $crawler->selectButton('Sign in')->form();
+
+        $this->client->submit($formObject, ['email' => 'john.doe@testexample.com', 'password' => 'identique']);
     }
 }
