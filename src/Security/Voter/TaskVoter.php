@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  */
 class TaskVoter extends Voter
 {
+    public const CREATE = 'TASK_CREATE';
     public const DELETE = 'TASK_DELETE';
     public const EDIT = 'TASK_EDIT';
     public const TOGGLE = 'TASK_TOGGLE';
@@ -22,20 +23,21 @@ class TaskVoter extends Voter
     private $security;
 
     // Security -> Permissions utilisateurs. (ROLES)
-    public function __construct(Security $security)
+    public function __construct(Security $security) 
     {
         $this->security = $security;
     }
     
     protected function supports(string $attribute, $task): bool
     {
-        return in_array($attribute, [self::DELETE,self::EDIT, self::TOGGLE])
+        return in_array($attribute, [self::CREATE, self::DELETE, self::EDIT, self::TOGGLE])
         && $task instanceof \App\Entity\Task;
     }
     
     
     protected function voteOnAttribute(string $attribute, $task, TokenInterface $token): bool
     {
+        dd('on voter actually');
         $user = $token->getUser();
 
         //On verifie si l'user est Admin
@@ -56,6 +58,9 @@ class TaskVoter extends Voter
         }
 
         switch ($attribute) {
+            case self::CREATE:
+                return true;
+                break;              
             case self::DELETE:
                 //On vérifie si on peut supprimer.
                 return $this->userCanDelete($task, $user);

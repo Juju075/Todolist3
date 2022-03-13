@@ -30,12 +30,13 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
             
             //Overriding.
             if ($nbUser === 1) {
-                $user->setRoles(['ROLE_ADMIN']); //$user->setRoles(['ROLE_ADMIN']); //<<<<
+                $user->setRoles(['ROLE_ADMIN']);
+                $user->setEmail('admin@todolist.com');
             }elseif ($nbUser === 2) {
-                $user->setEmail('john.doe@testexample.com'); //<<<<
-                $user->setRoles(['ROLE_USER']); //$user->setRoles(['ROLE_USER']);
+                $user->setEmail('john.doe@testexample.com');
+                $user->setRoles(['ROLE_USER']); 
             }else{
-                $user->setRoles(['ROLE_USER']); //$user->setRoles(['ROLE_USER']);
+                $user->setRoles(['ROLE_USER']);
             }    
                     
             $this->addReference('user_'.$nbUser,$user);

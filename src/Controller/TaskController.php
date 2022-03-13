@@ -42,11 +42,10 @@ class TaskController extends AbstractController
     {
         return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
     }
-
-    #[Route("/tasks/create", name: "task_create")]
-    #[IsGranted('ROLE_USER', subject: 'task')]
+    
     // #[Security("is_granted('ROLE_USER', task)", statusCode: 404, message: 'Resource not found.')]
-
+    //#[IsGranted('TASK_CREATE', subject: 'task')]
+    #[Route("/tasks/create", name: "task_create")]
     public function createAction(Request $request)
     {
         $task = new Task();
@@ -66,8 +65,8 @@ class TaskController extends AbstractController
         return $this->renderForm('task/create.html.twig', ['form'=> $form,]);
     }
 
+    //#[IsGranted('TASK_EDIT', subject: 'task',statusCode: 403)]
     #[Route("/tasks/{id}/edit", name:"task_edit")]
-    #[IsGranted('TASK_EDIT', subject: 'task',statusCode: 403)]
     public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);
@@ -84,8 +83,9 @@ class TaskController extends AbstractController
     }
 
 
+    //#[IsGranted('ROLE_USER', subject: 'task', statusCode: 403)]
     #[Route("/tasks/{id}/toggle", name: "task_toggle")]
-    #[IsGranted('ROLE_USER', subject: 'task', statusCode: 403)]
+    #[IsGranted('TASK_TOGGLE', subject: 'task', statusCode: 403)]
     public function toggleTaskAction(Task $task)
     {
         $task->toggle(!$task->isDone());
