@@ -96,9 +96,8 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-    // etre proprietaire pour delete 
+    //#[IsGranted('TASK_DELETE', subject: 'task')]
     #[Route("/tasks/{id}/delete", name: "task_delete")]
-    #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTaskAction(Task $task)
     {
             $this->em->remove($task);

@@ -33,27 +33,11 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Please sign in');
     }
 
-    public function testVisitingWhileLoggedIn()
-    {
-        $userRepository = static::getContainer()->get(UserRepository::class);
-
-        // retrieve the test user // empty
-        $testUser = $userRepository->findOneByEmail('john.doe@testexample.com'); // user numero 2 user de test
-
-        // simulate $testUser being logged in
-        $this->client->loginUser($testUser);
-
-        // test e.g. the profile page
-        // $this->client->request('GET', '/profile');
-        // $this->assertResponseIsSuccessful();
-        // $this->assertSelectorTextContains('h1', 'Hello John!');
-    }
-
     // =======================================================================
     // LOGIN AS USER  + variations. | Email & Password - input[type=submit] - Validé
     // =======================================================================    
     // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
-    public function testLoginWithUser()
+    public function testLoginWithUser(): void
     {
         $crawler = $this->client->request('GET', 'login');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -85,7 +69,7 @@ class SecurityControllerTest extends WebTestCase
     }
 
     // 1 - Expected: 200 with Admin ['ROLE_ADMIN'] Good credentials. validé
-    public function testLoginWithAdmin()
+    public function testLoginWithAdmin(): void
     {
         $crawler = $this->client->request('GET', 'login');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -117,21 +101,8 @@ class SecurityControllerTest extends WebTestCase
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     // 3 - Expected: no found  with  Bad Credentials.
-    public function testLoginWithBadPassword()
+    public function testLoginWithBadPassword(): void
     {
         $crawler = $this->client->request('GET', 'login');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -170,10 +141,13 @@ class SecurityControllerTest extends WebTestCase
     // =======================================================================
 
     // 1 - Expected: 200 with User ['ROLE_ADMIN']
-      public function testLogout()
+      public function testLogout():void
       {
         $crawler = $this->client->request('GET', 'logout');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+
+        //click sur lien
+        //
  
       }
 }

@@ -239,3 +239,16 @@ FILTER (Nodetraversing)
 Accessing Node Values
 ->nodeName()
 ->text()
+
+
+
+https://symfony.com/doc/current/testing.html (Assertion usage)
+
+
+Symfony provides useful shortcut methods for the most common cases.
+
+Response Assertions:
+Request Assertions:
+Browser Assertions:
+Crawler Assertions:
+Mailer Assertions:
