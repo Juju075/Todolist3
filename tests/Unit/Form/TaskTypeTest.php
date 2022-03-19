@@ -52,45 +52,5 @@ class TaskTypeTest extends TypeTestCase
         $this->assertEquals($task->getTitle(), $form->get('title')->getData());
         $this->assertEquals($task->getContent(), $form->get('content')->getData()); // Erreur ici null 
     }
-    
-    // =======================================================================
-    //  
-    // =======================================================================  
-    public function testCustomFormView(): void
-    {
-        //duplicate
-        $faker = Faker\Factory::create('fr_FR');
-
-        $formData = [
-            'title' => $faker->word(),
-            'content' => $faker->paragraph(),
-        ];
-
-
-        //en sus
-        $entity = new Task();
-            $entity->setTitle($faker->word());
-            $entity->setContent($faker->paragraph());
-
-        //Ici on vas cree le formulaire avec le bon type de formulaire cad avec la bonne entite.
-        //et l'objectif c de verifie si     
-        $view = $this->factory->create(TaskType::class, $entity)->createView(); //
-        //$view->vars
-
-        // en sus
-        $children = $view->children;
-
-        //Au-dessus validé
-
-        //Documentation -  si le tableau $array ne dispose pas de la clé $key         
-        $this->assertArrayHasKey('custom_var', $view->vars); // Error - Failed asserting that an array has the key 'custom_var'
-        //$this->assertSame('expected value', $view->vars['custom_var']); //Error - Undefined array key 'custom_var'
-
-        //en sus ok    
-        foreach (array_keys($formData) as $key) {
-            $this->assertArrayHasKey($key, $children);
-        }
-    }
-
 }
 

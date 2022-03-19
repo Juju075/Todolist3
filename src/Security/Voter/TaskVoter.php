@@ -37,7 +37,6 @@ class TaskVoter extends Voter
     
     protected function voteOnAttribute(string $attribute, $task, TokenInterface $token): bool
     {
-        dd('on voter actually');
         $user = $token->getUser();
 
         //On verifie si l'user est Admin

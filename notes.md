@@ -1,8 +1,11 @@
 Fin de projet[Remain]
 
+[]Nouveau repository github Todolist3
+
 Traits OK
 [X]- LoginAsAdmin()
 [X]- LoginAsUser()
+[OK tous changer] Correction Traits -> public static function()
 
 Tests validation progress:
 
@@ -10,8 +13,8 @@ Tests validation progress:
 
 [X].testBackofficeAccessWithAdmin()
 [X].testBackofficeAccessWithUser()
-[50%].testCreateAction() pb:
-[50%].testEditeAction() pb:
+[X].testCreateAction() pb:
+[X].testEditeAction() pb:
 
 ---
 
@@ -21,7 +24,7 @@ Tests validation progress:
 [X].testLoginWithUser()
 [X].testLoginWithAdmin()
 [90%].testLoginWithBadPassword()
-[].testLogout()
+[90%].testLogout() redirection uniquement
 
 ---
 
@@ -32,17 +35,16 @@ Tests validation progress:
 [VOTER].testEditTaskAction() pb:
 [VOTER].testDeleteTaskAction() pb:
 [VOTER].testToggleTaskAction() pb:
+[] tooogle en simple url de la
 
 ---
 
 4- FORMS (KerneltestCase)
 
 a) TaskTypeTest
-
-[90%].testTaskType()
-[50%].testCustomFormView() pb:? custom_var
+[X].testTaskType()
 
 b) UserTypeTest
+[X].testSubmitValidData()
 
-[90%].testSubmitValidData()
-[50%].testCustomFormView() pb:? custom_var
+[]BlackFire - Analyse de performance.

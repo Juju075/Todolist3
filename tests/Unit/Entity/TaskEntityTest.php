@@ -18,8 +18,8 @@ class TaskEntityTest extends KernelTestCase
     public function getEntity(): Task
     {
         return $task = new Task();
-        $task->setTitle('Titre de test');
-        $task->setContent('Contenu de test');
+        $task->setTitle('Ici titre');
+        $task->setContent('Ici contenu');
     }
 
     //Assertion personnalisé. (Service validator)
@@ -29,7 +29,7 @@ class TaskEntityTest extends KernelTestCase
         self::bootKernel();
         $error = self::$container->get('validator')->validate($task);
 
-        //Assertion
+        //Assertion Validate()
         $this->assertCount($number, $error);
     }
 
@@ -70,18 +70,20 @@ class TaskEntityTest extends KernelTestCase
     }
 
     public function testGetters(){
+
+        //Si il ya une tache
         if (!$this->task) {
             //Params function return
-            $attribut1 = $this->task->getId(); 
-            $attribut2 = $this->task->getTitle(); 
-            $attribut3 = $this->task->getContent(); 
-            $attribut4 = $this->task->getCreatedAt(); 
+            $get1 = $this->task->getId(); 
+            $get2 = $this->task->getTitle(); 
+            $get3 = $this->task->getContent(); 
+            $get4 = $this->task->getCreatedAt(); 
             
             //Assertions
-            $this->assertNotEmpty($attribut1); //expected not null & int
-            $this->assertContains($attribut2); //expected not null & string
-            $this->assertContains($attribut3); //expected not null & string
-            $this->assertContains($attribut4); //expected not null & datetime
+            $this->assertNotEmpty($get1); //expected not null & int 
+            $this->assertContains($get2); //expected not null & string
+            $this->assertContains($get3); //expected not null & string
+            $this->assertContains($get4); //expected not null & datetime
         }else{
             $this->assertContaints(0, $task, 'Run testValidEntity() First');
             

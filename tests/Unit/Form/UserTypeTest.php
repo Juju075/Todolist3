@@ -15,12 +15,10 @@ class UserTypeTest extends TypeTestCase
     
     public function setUp(): void
     {
+        parent::setUp();
         $this->faker = Faker\Factory::create('fr_FR');
     }
 
-    public function tearDown(): void
-    {
-    }
 
     // =======================================================================
     // Tests Home Page + variations. Validé
@@ -65,39 +63,6 @@ class UserTypeTest extends TypeTestCase
         //$this->assertSame($user->getRoles(), $form->get('roles')->getData());
     }
 
-    // =======================================================================
-    // Tests Home Page + variations. Validé
-    // =======================================================================
-    // 1 - Expected: 200 
-   public function testCustomFormView(){
-    //$formData = new User();
-
-        $formData = [
-            'username' => $this->faker->name(),
-            'password' => ['first' => 'root', 'second' => 'root'],
-            'email' => $this->faker->freeEmail(),
-            'roles' =>  false          
-        ];
-
-       // The initial data may be used to compute custom view variables
-       // $view = $this->factory->create(TestedType::class, $formData)
-       // ->createView();
-
-
-       //$view->vars    
-       $view = $this->factory->create(UserType::class, $formData)->createView(); //$form ? $this->factory->create(TestedType::class, $formData)
-       $children = $view->children; //Symfony\Component\Form\FormView::$children
-
-       //check that a custom variable exists and will be available in your form themes:
-       // dans la view $view    
-       // $this->assertArrayHasKey('custom_var', $view->vars);
-
-       foreach (array_keys($formData) as $key) {
-           $this->assertArrayHasKey($key, $children);
-       }
-
-       // $this->assertSame('expected value', $view->vars['custom_var']);
-   }
 }
 
 

@@ -44,8 +44,8 @@ class TaskController extends AbstractController
     }
     
     // #[Security("is_granted('ROLE_USER', task)", statusCode: 404, message: 'Resource not found.')]
-    //#[IsGranted('TASK_CREATE', subject: 'task')]
     #[Route("/tasks/create", name: "task_create")]
+    //#[IsGranted('TASK_CREATE', subject: 'task')]
     public function createAction(Request $request)
     {
         $task = new Task();
@@ -65,8 +65,8 @@ class TaskController extends AbstractController
         return $this->renderForm('task/create.html.twig', ['form'=> $form,]);
     }
 
-    //#[IsGranted('TASK_EDIT', subject: 'task',statusCode: 403)]
     #[Route("/tasks/{id}/edit", name:"task_edit")]
+    #[IsGranted('TASK_EDIT', subject: 'task')]
     public function editAction(Task $task, Request $request)
     {
         $form = $this->createForm(TaskType::class, $task);

@@ -1,35 +1,26 @@
 <?php
 declare(strict_types = 1);
 namespace App\Tests;
-
-use App\Tests\Traits\LoginAsAdminOrUser;
+use Faker;
+use App\Tests\security\LoginAccount;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Faker;
 
 /**
  * APP TODOLIST - BACKOFFICE DOCUMENTATION
  */
 class AdminControllerTest extends WebTestCase
 {
-    use LoginAsAdminOrUser;
-
+    //use LoginAsAdminOrUser;  // faire une class 
 
     private $client;
     private $faker;
-    
-    
+
     public function setUp(): void
     {
+        parent::setUp(); 
         $this->client = static::createClient();
         $this->faker = Faker\Factory::create('fr_FR');
-    }
-
-
-    public function tearDown(): void
-    {
-        $this->client = null;
-        
     }
 
     // =======================================================================
@@ -43,7 +34,7 @@ class AdminControllerTest extends WebTestCase
     // 1 - Expected: 200 with Admin logged. 
     public function testBackofficeAccessWithAdmin(): void
     {
-        $this->LoginAsAdmin(); //Security.yaml(ROLE_ADMIN) - ok
+        LoginAccount::LoginAsAdmin($this->client);
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $crawler = $this->client->request('GET', '/admin');
@@ -56,7 +47,7 @@ class AdminControllerTest extends WebTestCase
     // 2 - Expected: 400 with Admin logged.
     public function testBackofficeAccessWithUser(): void
     {
-        $this->LoginAsUser(); //
+        LoginAccount::LoginAsUser($this->client);
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $crawler = $this->client->request('GET', '/admin');
@@ -81,7 +72,7 @@ class AdminControllerTest extends WebTestCase
     // 1 - Expected: 
     public function testCreateAction(): void
     {
-        $this->LoginAsAdmin();
+        LoginAccount::LoginAsAdmin($this->client);
 
         $crawler = $this->client->request('GET', '/admin/users/create');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -120,12 +111,12 @@ class AdminControllerTest extends WebTestCase
     }
 
     // ----------------------------------------------------------------------
-    // EDIT USER ACTION
+    // EDIT USER ACTION validé
     // ----------------------------------------------------------------------
 
     public function testEditeAction(): void
     {
-        $this->LoginAsAdmin();
+        LoginAccount::LoginAsAdmin($this->client);
 
         $crawler = $this->client->request('GET', '/admin/users/21/edit');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -134,43 +125,29 @@ class AdminControllerTest extends WebTestCase
         $this->assertSame('Password', $crawler->filter('label[for="user_password_first"]')->text());
         $this->assertSame('Type your password', $crawler->filter('label[for="user_password_second"]')->text());
         $this->assertSame('Email', $crawler->filter('label[for="user_email"]')->text());
-        $this->assertSame('Select for Admin', $crawler->filter('label[for="user_roles"]')->text()); //Erreur ici
-
+        $this->assertSame('Select for Admin.', $crawler->filter('label[for="user_roles"]')->text());
+        
         $this->assertEquals(1, $crawler->filter('input[name="user[username]"]')->count());
         $this->assertEquals(1, $crawler->filter('input[name="user[password][first]"]')->count());
         $this->assertEquals(1, $crawler->filter('input[name="user[password][second]"]')->count());
         $this->assertEquals(1, $crawler->filter('input[name="user[email]"]')->count());
         $this->assertEquals(1, $crawler->filter('select[name="user[roles]"]')->count());
         
-        $this->assertEquals(1, $crawler->filter('select[name="user[roles"]')->count()); // Erreur ici
+        //$this->assertEquals(1, $crawler->filter('select[name="user[roles"]')->count()); // Erreur ici
 
         $form = $crawler->selectButton('Update')->form();
-        //Au-dessus validé
 
-        // $form['user[username]'] = $this->faker->userName();
-        // $form['user[password][first]'] = 'identique2';
-        // $form['user[password][second]'] = 'identique2';
-        // $form['user[email]'] = $this->faker->freeEmail();
+        $form['user[username]'] = $this->faker->userName();
+        $form['user[password][first]'] = 'identique2';
+        $form['user[password][second]'] = 'identique2';
+        $form['user[email]'] = $this->faker->freeEmail();
+        $form['user[roles]']->select('0');
 
+        $this->client->submit($form);
 
-        // $form['user[roles][0]']->select();
-
-        // $this->client->submit($form);
-
-        // $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-
-        // $crawler = $this->client->followRedirect();
-
-        // $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-        // $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $crawler = $this->client->followRedirect();
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
     }
-
-    // ----------------------------------------------------------------------
-    // DELETE USER ACTION [Not implemented]
-    // ----------------------------------------------------------------------
-
-
-
-
-
 }

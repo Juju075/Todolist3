@@ -2,7 +2,7 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
-use App\Tests\Traits\LoginAsAdminOrUser;
+use App\Tests\security\LoginAccount;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Faker;
@@ -23,19 +23,13 @@ class TaskControllerTest extends WebTestCase
         $this->faker = Faker\Factory::create('fr_FR');
     }
 
-    public function tearDown(): void
-    {
-        $this->client = null;
-    }
-
-
     // =======================================================================
     // Tests Home Page + variations. Validé
     // =======================================================================
     // 1 - Expected: 200 
     public function testlistAction(): void
     {
-        $this->LoginAsUser();
+        LoginAccount::LoginAsUser($this->client);
         $this->client->request('GET', '/tasks');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
@@ -53,7 +47,7 @@ class TaskControllerTest extends WebTestCase
     // 1 - Expected: 200 OK with authorized User or Admin.
     public function testCreateActionWithAdmin(): void
     {
-        $this->LoginAsAdmin(); //
+        LoginAccount::LoginAsAdmin($this->client);
 
         $crawler = $this->client->request('GET', '/tasks/create');
         //Voter
@@ -78,7 +72,7 @@ class TaskControllerTest extends WebTestCase
         
         //<form name="task"  name="task[title]
         $formObjet['task[title]'] = $this->faker->word();
-        $formObjet['task[content]'] = $this->faker->paragraphs();        
+        $formObjet['task[content]'] = $this->faker->paragraph();   //erreur ici   
         $this->client->submit($formObjet);
 
         $crawler = $this->client->followRedirect();
@@ -102,7 +96,7 @@ class TaskControllerTest extends WebTestCase
     public function testEditTaskAction(): void
     {
         //connecte l'utilisateur id
-        $this->LoginAsUser();
+        LoginAccount::LoginAsUser($this->client);
         $crawler = $this->client->followRedirect();
         $this->assertSelectorTextContains('h1', 'Task list');
         
@@ -153,8 +147,7 @@ class TaskControllerTest extends WebTestCase
     // 1 - Expected: 200 OK with authorized User.
     public function testDeleteTaskAction()
     {  
-        $this->LoginAsUser();
-
+        LoginAccount::LoginAsUser($this->client);
         $id =7;
         $this->client->request('GET', '/tasks//'. $id.'/delete');
         //voter ici
@@ -179,7 +172,7 @@ class TaskControllerTest extends WebTestCase
     // 1 - 
     public function testToggleTaskAction(): void
     {
-        $this->LoginAsUser();
+        LoginAccount::LoginAsUser($this->client);
         //$this->assertResponseStatusCodeSame(Response::HTTP_FOUND);     
   
         $this->client->request('GET', '/tasks/1/toggle');
@@ -191,6 +184,12 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
 
     }
+    public function testToogle()
+    {
+        LoginAccount::LoginAsUser($this->client);
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+        //click button action {od}
 
 
+    }
 }

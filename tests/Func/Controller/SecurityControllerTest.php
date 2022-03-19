@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace App\Tests;
 
 use App\Repository\UserRepository;
+use App\Tests\security\LoginAccount;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -16,14 +17,9 @@ class SecurityControllerTest extends WebTestCase
     
     public function setUp(): void
     {
+        parent::setUp();
         $this->client = static::createClient();
     }
-
-    // public function tearDown(): void
-    // {
-    //     $this->client = null;
-    // }
-
 
     public function testLoginUrlExist(): void
     {
@@ -65,6 +61,7 @@ class SecurityControllerTest extends WebTestCase
         $this->client->submit($formObject);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        
         $this->assertSelectorTextContains('h1', 'Task list'); 
     }
 
@@ -128,27 +125,28 @@ class SecurityControllerTest extends WebTestCase
         //Interacting with Response - Clicing on links. - Soumission
         $this->client->followRedirects();
         $this->client->submit($formObject);
-
+        
         //Assertion. ATTENTION 500 Internal error si le credential est inconnu.
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-
+        
         //Message d'erreur Invalid credentials. <div class="alert alert-danger">Invalid credentials.</div>
         $this->assertSame('Invalid credentials.', $crawler->filter('alert alert-danger')->text());        
     }
-
+    
     // =======================================================================
     // LOGOUT + variations.
     // =======================================================================
-
+    
     // 1 - Expected: 200 with User ['ROLE_ADMIN']
-      public function testLogout():void
-      {
+    public function testLogout():void
+    {
+        loginAccount::LoginAsUser($this->client);
+        
         $crawler = $this->client->request('GET', 'logout');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
-
-        //click sur lien
-        //
- 
+        $this->client->followRedirects();
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $this->assertSelectorTextContains('h1', 'Homepage');  
       }
 }
 

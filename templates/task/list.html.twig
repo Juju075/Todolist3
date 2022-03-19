@@ -31,8 +31,8 @@
         Toggle - Conditionner avec un twig is_granted(voter)
         <form action="{{ path('task_toggle', { id: task.id }) }}">
           <button class="btn btn-success btn-sm pull-right">
-            {% if not task.isDone %}Marquer comme faite{% else %}Marquer non
-            terminée{% endif %}
+            {% if not task.isDone %}Mark as done{% else %}Marquer non terminée{%
+            endif %}
           </button>
         </form>
 
