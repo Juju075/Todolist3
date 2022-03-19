@@ -1,11 +1,15 @@
 Fin de projet[Remain]
 
-[]Nouveau repository github Todolist3
+[X]Nouveau https://github.com/Juju075/Todolist3
+
+---
 
 Traits OK
 [X]- LoginAsAdmin()
 [X]- LoginAsUser()
-[OK tous changer] Correction Traits -> public static function()
+
+Class static functions
+[X] Correction Traits -> public static function()
 
 Tests validation progress:
 
@@ -35,7 +39,7 @@ Tests validation progress:
 [VOTER].testEditTaskAction() pb:
 [VOTER].testDeleteTaskAction() pb:
 [VOTER].testToggleTaskAction() pb:
-[] tooogle en simple url de la
+[20%] tooogle en simple url de la
 
 ---
 
@@ -47,4 +51,14 @@ a) TaskTypeTest
 b) UserTypeTest
 [X].testSubmitValidData()
 
+---
+
 []BlackFire - Analyse de performance.
+
+To start using Blackfire, we are going to install the following:
+
+-A language extension;
+-An agent to communicate with Blackfire's servers;
+-A profiling client (a browser extension or a CLI tool).
+
+https://curl.se/download.html
