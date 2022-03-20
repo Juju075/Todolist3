@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Task;
+use App\DataFixtures\UsersFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -33,7 +34,7 @@ class TasksFixtures extends Fixture
     public function getDependencies() : array
     {
         return array(
-            UserFixtures::class,
+            UsersFixtures::class,
         );
     }
 }

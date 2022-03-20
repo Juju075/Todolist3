@@ -2,18 +2,18 @@
 declare(strict_types = 1); 
 namespace App\Tests;
 
+use Faker;
+use App\DataFixtures\TasksFixtures;
 use App\Tests\security\LoginAccount;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Faker;
+
 
 /**
  * APP TODOLIST - FONCTIONALITIES DOCUMENTATION
  */
 class TaskControllerTest extends WebTestCase
 {
-    use LoginAsAdminOrUser;
-
     private $client;
     private $faker;
     
@@ -23,10 +23,17 @@ class TaskControllerTest extends WebTestCase
         $this->faker = Faker\Factory::create('fr_FR');
     }
 
+    /**
+     * Recharger la fixture avant de faire les tests. DamaBlundle pb?
+     */
+    public function __construct()
+    {
+        $this->loadFixtures([App\DataFixtures\TasksFixtures::class]);
+    }
+
     // =======================================================================
     // Tests Home Page + variations. Validé
     // =======================================================================
-    // 1 - Expected: 200 
     public function testlistAction(): void
     {
         LoginAccount::LoginAsUser($this->client);
@@ -44,7 +51,6 @@ class TaskControllerTest extends WebTestCase
     // ----------------------------------------------------------------------
     // CREATE ACTION. Title & Content | <>Form Label & Input (for= name=) - validé
     // ----------------------------------------------------------------------
-    // 1 - Expected: 200 OK with authorized User or Admin.
     public function testCreateActionWithAdmin(): void
     {
         LoginAccount::LoginAsAdmin($this->client);
@@ -86,33 +92,17 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Task list'); //h1 page
     }
     
-
     // ----------------------------------------------------------------------
-    // EDIT ACTION (User). Title & Content | <>Form Label & Input (for= name=)
-    // Voter desactive
-    // >>> Actuellement en Test <<<< Le voter block
+    // EDIT ACTION. | Validé
     // ----------------------------------------------------------------------
-    // 1 - Expected: 200 OK with authorized User.
     public function testEditTaskAction(): void
     {
-        //connecte l'utilisateur id
-        LoginAccount::LoginAsUser($this->client);
-        $crawler = $this->client->followRedirect();
-        $this->assertSelectorTextContains('h1', 'Task list');
-        
-        //$this->client->request('GET', '/admin/tasks/' .'8'. '/edit');
-        // Ici le Voter block  #[IsGranted('TASK_CREATE', subject: 'task')]
-        //$this->assertResponseStatusCodeSame(Response::HTTP_OK); 
-        
-        
-        // //uniquement si task existe
-        // if ($this->client->request('GET', '/admin/tasks/' .'1'. '/edit')) {
-        $crawler = $this->client->request('GET', '/admin/tasks/' . '1'. '/edit');
-
-        //Attention NOT_FOUND 
+        LoginAccount::LoginAsAdmin($this->client);
+        $crawler = $this->client->request('GET', '/tasks/1/edit');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK); 
 
-        //Verification des elements du formulaire.
+        //Verif form elements.
+
         // Source html: <label for="task_title" class="required">Title</label>
         $this->assertSame('Title', $crawler->filter('label[for="task_title"]')->text());
         // Source html: <input type="text" id="task_title" name="task[title]" required="required" value="sdfsdf" />
@@ -121,62 +111,48 @@ class TaskControllerTest extends WebTestCase
         $this->assertSame('Content', $crawler->filter('label[for="task_content"]')->text());
         $this->assertEquals(1, $crawler->filter('textarea[name="task[content]"]')->count());
 
+        //Soumission
         $formObjet = $crawler->selectButton('Update')->form();
-
-        $formObjet['task[title]'] = $this->faker->title();
-        $formObjet['task[content]'] = $this->faker->content();
-
+        $formObjet['task[title]'] = $this->faker->word();
+        $formObjet['task[content]'] = $this->faker->sentence();// invalidargumentexception "content"
         $this->client->submit($formObjet);
 
 
-        // $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
-        // $crawler = $this->client->followRedirect();
-        // $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        // //Flash 
-        // $this->assertEquals(1, $crawler->filter('div.alert-success')->count());    
-        // $this->assertSelectorTextContains('h1', 'Task list'); 
-        // }else{
-        //   $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);   
-        //   //no task yet
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $crawler = $this->client->followRedirect();
 
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+
+        //Alert
+        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());    
+        $this->assertSelectorTextContains('h1', 'Task list'); 
     }   
 
     // ----------------------------------------------------------------------
-    // DELETE ACTION.
+    // DELETE ACTION. | Validé
     // ----------------------------------------------------------------------
     // 1 - Expected: 200 OK with authorized User.
     public function testDeleteTaskAction()
     {  
-        LoginAccount::LoginAsUser($this->client);
-        $id =7;
-        $this->client->request('GET', '/tasks//'. $id.'/delete');
-        //voter ici
+        LoginAccount::LoginAsAdmin($this->client);
+        $crawler = $this->client->request('GET', '/tasks/2/delete');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+         $crawler = $this->client->followRedirect();
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
-
-        // $crawler = $this->client->followRedirect();
-
-        // $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-
-        // $this->assertEquals(1, $crawler->filter('div.alert-success')->count());    
-    
+        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
+        $this->assertSelectorTextContains('h1', 'Task list');     
     }    
 
-    // 2 - Expected: 200 OK with Admin.
-
-    // 3 - Expected: NO with unauthorized Use.
-
     // ----------------------------------------------------------------------
-    // TOOGLE ACTION.
+    // TOOGLE ACTION. | Validé
     // ----------------------------------------------------------------------
     // 1 - 
     public function testToggleTaskAction(): void
     {
-        LoginAccount::LoginAsUser($this->client);
-        //$this->assertResponseStatusCodeSame(Response::HTTP_FOUND);     
+        LoginAccount::LoginAsAdmin($this->client);   
   
         $this->client->request('GET', '/tasks/1/toggle');
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
 
         $crawler = $this->client->followRedirect();
 
@@ -189,7 +165,5 @@ class TaskControllerTest extends WebTestCase
         LoginAccount::LoginAsUser($this->client);
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
         //click button action {od}
-
-
     }
 }

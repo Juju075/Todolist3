@@ -43,9 +43,8 @@ class TaskController extends AbstractController
         return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
     }
     
-    // #[Security("is_granted('ROLE_USER', task)", statusCode: 404, message: 'Resource not found.')]
+    
     #[Route("/tasks/create", name: "task_create")]
-    //#[IsGranted('TASK_CREATE', subject: 'task')]
     public function createAction(Request $request)
     {
         $task = new Task();
@@ -96,8 +95,8 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-    //#[IsGranted('TASK_DELETE', subject: 'task')]
     #[Route("/tasks/{id}/delete", name: "task_delete")]
+    #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTaskAction(Task $task)
     {
             $this->em->remove($task);

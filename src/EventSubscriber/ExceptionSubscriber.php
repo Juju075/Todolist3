@@ -42,8 +42,8 @@ class ExceptionSubscriber implements EventSubscriberInterface
                     $response->setContent('code: 404 message: Resource not found'); 
                     break;
                 case $exception instanceof AccessDeniedException: // Voter Redirection avec Flash message
-                    // $response->setStatusCode(Response::HTTP_FORBIDDEN);
-                    // $response->setContent('code: 403 message: Forbiden'); 
+                    $response->setStatusCode(Response::HTTP_FORBIDDEN);
+                    $response->setContent('code: 403 message: Forbiden'); 
                     $response = $this->client->request('GET', '/');
                     break;
                 case $exception instanceof InvalidArgumentException:
