@@ -114,11 +114,11 @@ class AdminControllerTest extends WebTestCase
     // EDIT USER ACTION validé
     // ----------------------------------------------------------------------
 
-    public function testEditeAction(): void
+    public function testEditUserAction(): void
     {
         LoginAccount::LoginAsAdmin($this->client);
 
-        $crawler = $this->client->request('GET', '/admin/users/21/edit');
+        $crawler = $this->client->request('GET', '/admin/users/6/edit');
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 
         $this->assertSame('Username', $crawler->filter('label[for="user_username"]')->text());

@@ -64,7 +64,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
     }
 
     //Symfony events
-    public static function getSubscribedEvents() 
+    public static function getSubscribedEvents(): Array 
     {
         return [
             KernelEvents::EXCEPTION => ['onKernelException', 10],

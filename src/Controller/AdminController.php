@@ -29,7 +29,6 @@ class AdminController extends AbstractController
 
     }
 
-
     #[Route('/', name: 'app_admin', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
@@ -80,7 +79,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            $this->em->flush();
+            //$this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été modifié');
             return $this->redirectToRoute('app_admin_users_list');
         }    

@@ -16,7 +16,7 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
         $this->passwordHasher = $passwordHasher;
     }
     
-    //Terminal server de test (doctrine:fixtures:load --group=users --env=test)
+    //Terminal server de test (symfony console d:f:l --group=users --env=test --no-interaction)
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
@@ -37,9 +37,8 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
                 $user->setRoles(['ROLE_USER']); 
             }else{
                 $user->setRoles(['ROLE_USER']);
-            }    
-                    
-            $this->addReference('user_'.$nbUser,$user);
+            }           
+            $this->addReference('user_'. $nbUser, $user);
             $manager->persist($user);
         }
         $manager->flush();

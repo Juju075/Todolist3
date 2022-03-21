@@ -7,23 +7,23 @@ use App\Entity\Task;
 use App\DataFixtures\UsersFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TasksFixtures extends Fixture
+class TasksFixtures extends Fixture implements DependentFixtureInterface
 { 
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
         
-        //User 0 it's Admin user_admin_0
-        for ($nbUser = 1; $nbUser <3 ; $nbUser++) { 
+        for ($nbUser = 1; $nbUser <5 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
-            
+        
             for ($nbTask=0; $nbTask < rand(3, 12) ; $nbTask++) { 
             $task = new Task();
-            $task->setTitle($faker->title());
-            $task->setContent($faker->content());
+            $task->setTitle($faker->word());
+            $task->setContent($faker->text(250));
             $task->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'));
-            
+            $task->setUser($user);
             $user->addTask($task);
             $manager->persist($task);
             }
@@ -31,10 +31,10 @@ class TasksFixtures extends Fixture
         $manager->flush();
     }
 
-    public function getDependencies() : array
+    public function getDependencies(): Array
     {
-        return array(
+        return [
             UsersFixtures::class,
-        );
+        ];
     }
 }

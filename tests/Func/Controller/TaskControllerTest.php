@@ -23,14 +23,6 @@ class TaskControllerTest extends WebTestCase
         $this->faker = Faker\Factory::create('fr_FR');
     }
 
-    /**
-     * Recharger la fixture avant de faire les tests. DamaBlundle pb?
-     */
-    public function __construct()
-    {
-        $this->loadFixtures([App\DataFixtures\TasksFixtures::class]);
-    }
-
     // =======================================================================
     // Tests Home Page + variations. Validé
     // =======================================================================
@@ -135,9 +127,9 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteTaskAction()
     {  
         LoginAccount::LoginAsAdmin($this->client);
-        $crawler = $this->client->request('GET', '/tasks/2/delete');
+        $crawler = $this->client->request('GET', '/tasks/27/delete');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
-         $crawler = $this->client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
         $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
         $this->assertSelectorTextContains('h1', 'Task list');     

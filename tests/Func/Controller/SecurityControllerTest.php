@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * APP TODOLIST - SECURITY DOCUMENTATION
- * Sur quel bdd 
  */
 class SecurityControllerTest extends WebTestCase
 {
@@ -61,7 +60,8 @@ class SecurityControllerTest extends WebTestCase
         $this->client->submit($formObject);
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
-        $this->assertSelectorTextContains('h1', 'Please sign in'); 
+        //debug said matches selector "h1" and the text "Task list" of the node matching selector "h1" contains "Please sign in".
+        $this->assertSelectorTextContains('h1', 'Task list'); 
     }
 
     // 1 - Expected: 200 with Admin ['ROLE_ADMIN'] Good credentials. validé
