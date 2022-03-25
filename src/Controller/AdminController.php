@@ -59,7 +59,7 @@ class AdminController extends AbstractController
             }else{
                 $user->setRoles(['ROLE_USER']);
             }
-!       
+       
             $this->em->persist($user);
             $this->em->flush();
             $this->addFlash('success', 'New User has been added.');

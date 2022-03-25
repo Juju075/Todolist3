@@ -6,55 +6,6 @@ Fin de projet[Remain]
 
 ---
 
-Traits OK
-[X]- LoginAsAdmin()
-[X]- LoginAsUser()
-
-Class static functions
-[X] Correction Traits -> public static function()
-
-Tests validation progress:
-
-1- AdminControllerTest (Webtastcase)
-
-[X].testBackofficeAccessWithAdmin()
-[X].testBackofficeAccessWithUser()
-[X].testCreateAction() pb:
-[X].testEditeAction() pb:
-
----
-
-2- SecurityControllerTest (Webtastcase)
-
-[X].testLoginUrlExist()
-[X].testLoginWithUser()  
-[X].testLoginWithAdmin()
-[X].testLoginWithBadPassword()
-[90%].testLogout() en Failure rapport ....
-
----
-
-3- TaskControllerTest (Webtastcase)
-
-[X].testlistAction()
-[X].testCreateActionWithAdmin() en Failure rapport ....
-[].testEditTaskAction() pb: en Failure rapport .... voter fonctionne
-[].testDeleteTaskAction() pb: en Failure rapport .... voter fonctionne
-[X].testToggleTaskAction() pb: en Failure rapport .... voter fonctionne
-[20%] tooogle en simple url de la
-
----
-
-4- FORMS (KerneltestCase)
-
-a) TaskTypeTest
-[X].testTaskType()
-
-b) UserTypeTest
-[X].testSubmitValidData()
-
----
-
 Livrable standard +
 
 ============
@@ -77,7 +28,7 @@ vendor/bin/phpunit --coverage-html web/test-coverage
 
 ---
 
-[]BlackFire - Analyse de performance.
+[X]BlackFire - Analyse de performance.
 
 To start using Blackfire, we are going to install the following:
 
@@ -104,4 +55,4 @@ Concernant l’audit de performance, l’usage de Blackfire est obligatoire
 Audit de qualité/performance de l'app:
 
 produire un audit de code sur les deux axes suivants :
-la qualité de code et la performance.
+[]la qualité de code et [X]la performance.
