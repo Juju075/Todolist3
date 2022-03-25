@@ -1,9 +1,8 @@
 ## P9_TodoList
 
-Project 9 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.<br/>
-Ce projet consite à la création
-
-Vous pouvez les retrouver ici<br/>
+Project 8 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.<br/>
+Ce projet consite à l'amelioration d'une application déjà existante'<br/>
+mettre àh jour la version symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
 ====================
 
@@ -11,7 +10,7 @@ Vous pouvez les retrouver ici<br/>
 <b>MANUEL TECHNIQUE</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
-api_bilemo.pdf
+.pdf
 
 ====================
 
@@ -127,11 +126,9 @@ Pour lancer la documentation (tests sur la BDD de test).
 
 ## Bundle utilisé
 
-- doctrine-fixtures-bundle (Géneration de jeux de données) - <br/>
-- jm serializer bundle (serialization and deserialisation)- https://github.com/schmittjoh/JMSSerializerBundle<br/>
-- lexik/jwt-authentication-bundle - https://github.com/lexik/LexikJWTAuthenticationBundle<br/>
-- BabDev/Pagerfanta(pagination for symfony) - https://github.com/BabDev/Pagerfanta<br/>
-- Hateoas (autodecouvrable api) - https://github.com/willdurand/Hateoas<br/>
+- Faker - https://github.com/FakerPHP/fakerphp.github.io<br/>
+- Phpunit - https://github.com/symfony/phpunit-bridge<br/>
+- Damatestbundle - https://github.com/dmaicher/doctrine-test-bundle/blob/master/src/DAMA/DoctrineTestBundle/DAMADoctrineTestBundle.php<br/>
 
 ### Auteur
 
