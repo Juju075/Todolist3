@@ -5,7 +5,7 @@ Ce projet consite à l'amelioration d'une application déjà existante.<br/>
 Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
 ========= DOCUMENTATIONS CONNEXE ===========</br></br>
-<b>Manuel technique de l'implementation de l'authentification</br>
+<b>Manuel technique de l'implementation de l'authentification</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
 .pdf
@@ -54,7 +54,7 @@ php bin/console doctrine:migrations:migrate`<br><br>
 
 ---
 
-2 - Nom de la base de données : `todolist_test`<br>
+2 - Nom de la base de données de test: `todolist_test`<br>
 Vous devez également créer la base de donnée de test.<br>
 
 <b>.env.test</b><br><br>
@@ -74,7 +74,7 @@ php bin/console doctrine:migrations:migrate --env=test<br>
 
 # ETAPE 2 - Création d'un jeux de données.
 
--<b>Methode 1 (Fichier à télecharger)</b>
+-<b>Methode 1 (Chargement directement depuis phpMyAdmin)</b>
 
 - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
@@ -89,7 +89,7 @@ Pour la BDD de test:
 
 ---
 
--<b>Methode 2 (Lancer un script/fixture)</b>
+-<b>Methode 2 (créer vos propre datas)</b>
 
 - Creation d'un jeux de donées via une fixture<br/>
 
@@ -98,6 +98,9 @@ lancer le Terminal et saisiser la commande suivante:<br/>
 
 php bin/console doctrine:fixtures:load --no-interaction<br/>
 php bin/console doctrine:fixtures:load --env=test --no-interaction<br/>
+
+Vous pouvez à tout moment nettoyer à 100% votre bdd de test
+suivre les instructions de rafraichir la base de données de test en cas de failure.
 
 ---
 
