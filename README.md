@@ -67,7 +67,7 @@ Pour la BDD de test:
 
 - Fichier à charger: todolisttest.sql
 
-OU
+---
 
 -<b>Methode 2</b> - Creation d'un jeux de donees via une fixture<br/>
 
