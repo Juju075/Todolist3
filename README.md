@@ -40,6 +40,8 @@ _Go with a console to the repository and do thoses commands_
 - `composer install`
 - `composer update`
 
+---
+
 ETAPE 1 - Création de la BDD en locale.
 
 - Base de données : `toplist`
@@ -49,6 +51,8 @@ ETAPE 1 - Création de la BDD en locale.
   php bin/console doctrine:migrations:migrate
   Vous devez egalement creer la base de donnée de test
   qui sera completer d'un jeu de données via la fixture.
+
+---
 
 ETAPE 2 - Création d'un jeux de données.
 
