@@ -138,7 +138,7 @@ Avant toute chose vous devez initialiser votre Serveur PHP local.
 - <b>AUTHENTIFICATION</b> <br/>
 
 Pour se connecter:<br/>
-ATTENTION VOUS AVEZ 2 ENVIRONNEMENT DE TRAVAIL.<br/>
+ATTENTION VOUS AVEZ 2 ENVIRONNEMENTs DE TRAVAIL.<br/>
 1 bdd standard<br/>
 2 bdd de test<br/>
 
@@ -149,12 +149,6 @@ password: identique<br/><br/>
 ["ROLE_USER"]<br/>
 username:< pick your username in database > <br/>
 password: identique<br/><br/>
-
-TESTER LAPPLICATION<br/>
-Pour lancer la documentation (tests sur la BDD de test).<br/><br/>
-
-- cette commande vas lister et tester tous les methods<br/>
-- avec cette commande vous pouvez egalement editer un rapport html avec un taux de couverture.<br/>
 
 ## Bundle utilisé
 
