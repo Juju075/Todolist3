@@ -101,7 +101,7 @@ php bin/console doctrine:fixtures:load --env=test --no-interaction<br/>
 
 ---
 
-Connexion à la Bdd.<br/>
+Comment se connecter à la bdd phpMyAdmin?<br/>
 
 {<br/>
 "host": "localhost",<br/>
