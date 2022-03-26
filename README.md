@@ -45,7 +45,7 @@ _Go with a console to the repository and do thoses commands_
 
 1 - Nom de la base de données : `todolist`<br>
 
-<b>.env.local</b><br><br>
+<b>.env.local</b><br>
 
 `DATABASE_URL=mysql://root:@127.0.0.1:3306/todolist?serverVersion=5.7`
 
@@ -57,7 +57,7 @@ php bin/console doctrine:migrations:migrate`<br><br>
 2 - Nom de la base de données de test: `todolist_test`<br>
 Vous devez également créer la base de donnée de test.<br>
 
-<b>.env.test</b><br><br>
+<b>.env.test</b><br>
 
 define your env variables for the test env here
 
