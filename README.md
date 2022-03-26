@@ -114,6 +114,14 @@ Comment lancer un test automatise avec une analyse de couverture de code?
 cmd terminal:
 `vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
 
+Comment rafraichir la base de données de test en cas de failure.
+[copier coller l'ensemble en 1 bloc dans le terminal]
+
+symfony console doctrine:database:drop --force --env=test<br>
+symfony console d:d:c --env=test<br>
+symfony console d:s:u --force --env=test<br>
+symfony console d:f:l --env=test --no-interaction<br>
+
 ======================
 
 ## use
