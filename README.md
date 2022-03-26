@@ -5,8 +5,7 @@ Ce projet consite à l'amelioration d'une application déjà existante'<br/>
 mettre àh jour la version symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
 ========= DOCUMENTATIONS CONNEXE ===========
-
-<b>MANUEL TECHNIQUE IMPLEMENTATION DE L'AUTHENTIFICATION</b>
+<b>Manuel technique de l'implementation de l'authentification</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
 .pdf
@@ -44,13 +43,13 @@ _Go with a console to the repository and do thoses commands_
 
 # ETAPE 1 - Création de la BDD en locale.
 
-- Base de données : `toplist`
-  php bin/console doctrine:database:create
+1 - Base de données : `toplist`
+php bin/console doctrine:database:create
 
-- Crée le schema de la database.
-  php bin/console doctrine:migrations:migrate
-  Vous devez egalement creer la base de donnée de test
-  qui sera completer d'un jeu de données via la fixture.
+2 - Crée le schema de la database.
+php bin/console doctrine:migrations:migrate
+Vous devez egalement creer la base de donnée de test
+qui sera completer d'un jeu de données via la fixture.
 
 ---
 
