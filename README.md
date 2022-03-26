@@ -104,7 +104,7 @@ suivre les instructions de rafraichir la base de données de test en cas de fail
 
 ---
 
-Comment se connecter à la bdd phpMyAdmin?<br/>
+<b>Comment se connecter à la bdd phpMyAdmin?</b><br/>
 
 {<br/>
 "host": "localhost",<br/>
@@ -113,11 +113,11 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 "pass": "votre mot de passe personnel"<br/>
 }<br/>
 
-Comment lancer un test automatisé avec une analyse de couverture de code?<br>
+<b>Comment lancer un test automatisé avec une analyse de couverture de code?</b><br>
 cmd terminal:<br>
 `vendor/bin/phpunit --coverage-html html --colors -v --testdox`<br><br>
 
-Comment rafraichir la base de données de test en cas de failure.<br>
+<b>Comment rafraichir la base de données de test en cas de failure.</b><br>
 [copier coller l'ensemble en 1 bloc dans le terminal]<br><br>
 
 symfony console doctrine:database:drop --force --env=test<br>
