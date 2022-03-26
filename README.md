@@ -110,6 +110,10 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 "pass": "votre mot de passe personnel"<br/>
 }<br/>
 
+Comment lancer un test automatise avec une analyse de couverture de code?
+cmd terminal:
+`vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
+
 ======================
 
 ## use
