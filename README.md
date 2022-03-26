@@ -129,7 +129,7 @@ symfony console d:f:l --env=test --no-interaction<br>
 
 ## use
 
-Avant toute chose vous devez initialise votre Serveur PHP local.
+Avant toute chose vous devez initialiser votre Serveur PHP local.
 
 - Ouvrir Wamp
 - symfony server:start -d
@@ -137,20 +137,20 @@ Avant toute chose vous devez initialise votre Serveur PHP local.
 
 - <b>AUTHENTIFICATION</b> <br/>
 
-Pour se connecter avec le
-["ROLE_ADMIN"]
-username:
-password: identique
+Pour se connecter avec le<br/>
+["ROLE_ADMIN"]<br/>
+username:<br/>
+password: identique<br/><br/>
 
-["ROLE_USER"]
-username:
-password: identique
+["ROLE_USER"]<br/>
+username:<br/>
+password: identique<br/><br/>
 
-TESTER LAPPLICATION
-Pour lancer la documentation (tests sur la BDD de test).
+TESTER LAPPLICATION<br/>
+Pour lancer la documentation (tests sur la BDD de test).<br/><br/>
 
-- cette commande vas lister et tester tous les methods
-- avec cette commande vous pouvez egalement editer un rapport html avec un taux de couverture.
+- cette commande vas lister et tester tous les methods<br/>
+- avec cette commande vous pouvez egalement editer un rapport html avec un taux de couverture.<br/>
 
 ## Bundle utilisé
 
