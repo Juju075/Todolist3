@@ -56,7 +56,7 @@ _Go with a console to the repository and do thoses commands_
 
 # ETAPE 2 - Création d'un jeux de données.
 
--<b>Methode 1 (Fichier source à telecharger)</b>
+-<b>Methode 1 (Fichier à télecharger)</b>
 
 - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
@@ -71,7 +71,7 @@ Pour la BDD de test:
 
 ---
 
--<b>Methode 2 (Charger un script)</b>
+-<b>Methode 2 (Lancer un script)</b>
 
 - Creation d'un jeux de donees via une fixture<br/>
 
