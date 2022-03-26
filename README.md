@@ -42,29 +42,24 @@ _Go with a console to the repository and do thoses commands_
 
 ETAPE 1 - Création de la BDD en locale.
 
-> xcvx
-> -Configurer votre espace .env.local et .env.test
-> eg:
-> DATABASE_URL=mysql://userName:@127.0.0.1:3306/databaseName?serverVersion=5.7
-
 eg:
 
-- Base de données : `toplist`
-  php bin/console doctrine:database:create
+> - Base de données : `toplist`
+>   php bin/console doctrine:database:create
 
-- Crée le schema de la database.
-  php bin/console doctrine:migrations:migrate
+> - Crée le schema de la database.
+>   php bin/console doctrine:migrations:migrate
 
-Vous devez egalement creer la base de donnée de test
-qui sera completer d'un jeu de données via la fixture.
+> Vous devez egalement creer la base de donnée de test
+> qui sera completer d'un jeu de données via la fixture.
 
 ETAPE
 Copy paste dans le terminal une foi
 
-symfony console doctrine:database:drop --force --env=test
-symfony console d:d:c --env=test
-symfony console d:s:u --force --env=test
-symfony console d:f:l --env=test --no-interaction
+> symfony console doctrine:database:drop --force --env=test
+> symfony console d:d:c --env=test
+> symfony console d:s:u --force --env=test
+> symfony console d:f:l --env=test --no-interaction
 
 -<b>Methode 1</b> - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
