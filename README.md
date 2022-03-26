@@ -76,16 +76,16 @@ php bin/console doctrine:migrations:migrate --env=test<br>
 
 -<b>Methode 1 (Chargement directement depuis phpMyAdmin)</b>
 
-- Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
+- Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)<br><br>
 
-Pour la BDD principale:
+Pour la BDD principale:<br>
 
-- Lien de saisie: http://localhost/phpmyadmin/server_sql.php
+- Lien de saisie: http://localhost/phpmyadmin/server_sql.php<br>
 - Fichier à charger: todolist.sql (à la racine du projet)
 
 Pour la BDD de test:
 
-- Fichier à charger: todolisttest.sql
+- Fichier à charger: todolisttest.sql<br><br>
 
 ---
 
@@ -99,8 +99,8 @@ lancer le Terminal et saisiser la commande suivante:<br/>
 php bin/console doctrine:fixtures:load --no-interaction<br/>
 php bin/console doctrine:fixtures:load --env=test --no-interaction<br/>
 
-Vous pouvez à tout moment nettoyer à 100% votre bdd de test
-suivre les instructions de rafraichir la base de données de test en cas de failure.
+Vous pouvez à tout moment nettoyer à 100% votre bdd de test<br>
+suivre les instructions de rafraichir la base de données de test en cas de failure.<br>
 
 ---
 
@@ -113,12 +113,12 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 "pass": "votre mot de passe personnel"<br/>
 }<br/>
 
-> Comment lancer un test automatisé avec une analyse de couverture de code?
-> cmd terminal:
-> `vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
+Comment lancer un test automatisé avec une analyse de couverture de code?<br>
+cmd terminal:<br>
+`vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`<br><br>
 
-> Comment rafraichir la base de données de test en cas de failure.
-> [copier coller l'ensemble en 1 bloc dans le terminal]
+Comment rafraichir la base de données de test en cas de failure.<br>
+[copier coller l'ensemble en 1 bloc dans le terminal]<br><br>
 
 symfony console doctrine:database:drop --force --env=test<br>
 symfony console d:d:c --env=test<br>
