@@ -44,13 +44,22 @@ _Go with a console to the repository and do thoses commands_
 # ETAPE 1 - Création des 2 BDD en locale.
 
 1 - Nom de la base de données : `toplist`<br>
-.env.local<br><br>
+<b>.env.local</b><br><br>
+DATABASE_URL=mysql://root:@127.0.0.1:3306/todolist?serverVersion=5.7
 
 php bin/console doctrine:database:create<br>
 php bin/console doctrine:migrations:migrate<br><br>
 
 2 - Vous devez également créer la base de donnée de test.<br>
-.env.test<br><br>
+<b>.env.test</b><br><br>
+
+# define your env variables for the test env here
+
+KERNEL_CLASS='App\Kernel'<br>
+APP_SECRET='$ecretf0rt3st'<br>
+SYMFONY_DEPRECATIONS_HELPER=999999<br>
+PANTHER_APP_ENV=panther<br>
+PANTHER_ERROR_SCREENSHOT_DIR=./var/error-screenshots
 
 php bin/console doctrine:database:create --env=test<br>
 php bin/console doctrine:migrations:migrate --env=test<br>
