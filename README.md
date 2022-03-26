@@ -56,7 +56,7 @@ php bin/console doctrine:migrations:migrate`<br><br>
 
 <b>.env.test</b><br><br>
 
-# define your env variables for the test env here
+define your env variables for the test env here
 
 KERNEL_CLASS='App\Kernel'<br>
 APP_SECRET='$ecretf0rt3st'<br>
