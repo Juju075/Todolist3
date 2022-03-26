@@ -113,12 +113,12 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 "pass": "votre mot de passe personnel"<br/>
 }<br/>
 
-Comment lancer un test automatisé avec une analyse de couverture de code?
-cmd terminal:
-`vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
+> Comment lancer un test automatisé avec une analyse de couverture de code?
+> cmd terminal:
+> `vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
 
-Comment rafraichir la base de données de test en cas de failure.
-[copier coller l'ensemble en 1 bloc dans le terminal]
+> Comment rafraichir la base de données de test en cas de failure.
+> [copier coller l'ensemble en 1 bloc dans le terminal]
 
 symfony console doctrine:database:drop --force --env=test<br>
 symfony console d:d:c --env=test<br>
