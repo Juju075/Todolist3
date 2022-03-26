@@ -1,8 +1,8 @@
 ## P8_TodoList
 
 Project 8 du parcours développeur d'application PHP/Symfony d'Openclassrooms.<br/><br/>
-Ce projet consite à l'amelioration d'une application déjà existante'<br/>
-mettre àh jour la version symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
+Ce projet consite à l'amelioration d'une application déjà existante.<br/>
+Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
 ========= DOCUMENTATIONS CONNEXE ===========
 <b>Manuel technique de l'implementation de l'authentification</b>
@@ -110,7 +110,7 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 "pass": "votre mot de passe personnel"<br/>
 }<br/>
 
-Comment lancer un test automatise avec une analyse de couverture de code?
+Comment lancer un test automatisé avec une analyse de couverture de code?
 cmd terminal:
 `vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`
 
