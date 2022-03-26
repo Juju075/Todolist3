@@ -106,12 +106,8 @@ suivre les instructions de rafraichir la base de données de test en cas de fail
 
 <b>Comment se connecter à la bdd via phpMyAdmin?</b><br/>
 
-{<br/>
-"host": "localhost",<br/>
-"dbname": "todolist",<br/>
-"user": "vos identifiant personnel",<br/>
-"pass": "votre mot de passe personnel"<br/>
-}<br/>
+"user": "vos identifiant personnel"<br>
+"pass": "votre mot de passe personnel"<br><br>
 
 <b>Comment lancer un test automatisé avec une analyse de couverture de code?</b><br>
 cmd terminal:<br>
