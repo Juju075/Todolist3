@@ -54,7 +54,7 @@ ETAPE 1 - Création de la BDD en locale.
 
 ---
 
-ETAPE 2 - Création d'un jeux de données.
+# ETAPE 2 - Création d'un jeux de données.
 
 -<b>Methode 1</b> - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
@@ -77,7 +77,8 @@ lancer le Terminal et saisiser la commande suivante:<br/>
 php bin/console doctrine:fixtures:load --no-interaction<br/>
 php bin/console doctrine:fixtures:load --env=test --no-interaction<br/>
 
-=====================<br/>
+---
+
 Connexion à la Bdd.<br/>
 
 {<br/>
