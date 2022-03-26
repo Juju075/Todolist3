@@ -46,7 +46,8 @@ _Go with a console to the repository and do thoses commands_
 1 - Nom de la base de données : `toplist`<br>
 
 <b>.env.local</b><br><br>
-`DATABASE_URL=mysql://root:@127.0.0.1:3306/todolist?serverVersion=5.7
+
+`DATABASE_URL=mysql://root:@127.0.0.1:3306/todolist?serverVersion=5.7`
 
 php bin/console doctrine:database:create<br>
 php bin/console doctrine:migrations:migrate`<br><br>
