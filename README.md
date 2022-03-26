@@ -4,9 +4,9 @@ Project 8 du parcours développeur d'application PHP/Symfony d'Openclassrooms.<b
 Ce projet consite à l'amelioration d'une application déjà existante'<br/>
 mettre àh jour la version symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
-====================
+========= DOCUMENTATIONS CONNEXE ===========
 
-<b>MANUEL TECHNIQUE</b>
+<b>MANUEL TECHNIQUE IMPLEMENTATION DE L'AUTHENTIFICATION</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
 .pdf
