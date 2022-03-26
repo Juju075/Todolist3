@@ -42,7 +42,7 @@ _Go with a console to the repository and do thoses commands_
 
 ---
 
-ETAPE 1 - Création de la BDD en locale.
+# ETAPE 1 - Création de la BDD en locale.
 
 - Base de données : `toplist`
   php bin/console doctrine:database:create
