@@ -1,12 +1,11 @@
-## P9_TodoList
+## P8_TodoList
 
-Project 8 du "parcours développeur d'application PHP/Symfony" d'Openclassrooms.<br/>
+Project 8 du parcours développeur d'application PHP/Symfony d'Openclassrooms.<br/><br/>
 Ce projet consite à l'amelioration d'une application déjà existante'<br/>
 mettre àh jour la version symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
 
 ====================
 
-====================<br/>
 <b>MANUEL TECHNIQUE</b>
 
 Veuillez telecharger le fichier cidessous la racine du projet:<br/>
@@ -41,8 +40,8 @@ _Go with a console to the repository and do thoses commands_
 - `composer install`
 - `composer update`
 
-ETAPE Creation de la BDD en locale.
-
+ETAPE 1 - Création de la BDD en locale.
+>
 -Configurer votre espace .env.local et .env.test
 eg:
 DATABASE_URL=mysql://userName:@127.0.0.1:3306/databaseName?serverVersion=5.7

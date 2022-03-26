@@ -34,6 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 25, unique:true)]
     #[Assert\NotBlank(message:'Vous devez saisir un nom d\'utilisateur.')] 
+    #[Assert\Length(min: 3, max: 20, 
+        minMessage:'Your first name must be at least {{ limit }}.',
+        maxMessage:'Your first name cannot be longer than {{ limit }}.',
+    )] 
     private $username;
 
 
