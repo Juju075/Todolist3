@@ -58,7 +58,11 @@ php bin/console doctrine:migrations:migrate`<br><br>
 
 # define your env variables for the test env here
 
-`KERNEL_CLASS='App\Kernel'<br> APP_SECRET='$ecretf0rt3st'<br> SYMFONY_DEPRECATIONS_HELPER=999999<br> PANTHER_APP_ENV=panther<br> PANTHER_ERROR_SCREENSHOT_DIR=./var/error-screenshots`
+KERNEL_CLASS='App\Kernel'<br>
+APP_SECRET='$ecretf0rt3st'<br>
+SYMFONY_DEPRECATIONS_HELPER=999999<br>
+PANTHER_APP_ENV=panther<br>
+PANTHER_ERROR_SCREENSHOT_DIR=./var/error-screenshots
 
 php bin/console doctrine:database:create --env=test<br>
 php bin/console doctrine:migrations:migrate --env=test<br>
