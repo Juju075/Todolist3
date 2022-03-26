@@ -43,17 +43,17 @@ _Go with a console to the repository and do thoses commands_
 
 # ETAPE 1 - Création des 2 BDD en locale.
 
-1 - Nom de la base de données : `toplist`
-.env.local
+1 - Nom de la base de données : `toplist`<br>
+.env.local<br><br>
 
-php bin/console doctrine:database:create
-php bin/console doctrine:migrations:migrate
+php bin/console doctrine:database:create<br>
+php bin/console doctrine:migrations:migrate<br><br>
 
-2 - Vous devez également créer la base de donnée de test.
-.env.test
+2 - Vous devez également créer la base de donnée de test.<br>
+.env.test<br><br>
 
-php bin/console doctrine:database:create --env=test
-php bin/console doctrine:migrations:migrate --env=test
+php bin/console doctrine:database:create --env=test<br>
+php bin/console doctrine:migrations:migrate --env=test<br>
 
 ---
 
