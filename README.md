@@ -121,7 +121,7 @@ symfony console d:d:c --env=test<br>
 symfony console d:s:u --force --env=test<br>
 symfony console d:f:l --env=test --no-interaction<br>
 
-======================
+---
 
 ## use
 
