@@ -46,19 +46,20 @@ ETAPE 1 - Création de la BDD en locale.
 
 - Base de données : `toplist`
   php bin/console doctrine:database:create
-  
-  - Crée le schema de la database.
-  php bin/console doctrine:migrations:migrate
-  Vous devez egalement creer la base de donnée de test
-  qui sera completer d'un jeu de données via la fixture.
 
-ETAPE
-Copy paste dans le terminal une foi
->
-  symfony console doctrine:database:drop --force --env=test
-  symfony console d:d:c --env=test
-  symfony console d:s:u --force --env=test
-  symfony console d:f:l --env=test --no-interaction
+  - Crée le schema de la database.
+    php bin/console doctrine:migrations:migrate
+    Vous devez egalement creer la base de donnée de test
+    qui sera completer d'un jeu de données via la fixture.
+
+ETAPE 2 - Création d'un jeux de données.
+
+Saissisez ces cmd dans le terminatl
+
+> symfony console doctrine:database:drop --force --env=test<br>
+> symfony console d:d:c --env=test<br>
+> symfony console d:s:u --force --env=test<br>
+> symfony console d:f:l --env=test --no-interaction<br>
 
 -<b>Methode 1</b> - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
