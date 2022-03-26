@@ -115,7 +115,7 @@ Comment se connecter à la bdd phpMyAdmin?<br/>
 
 Comment lancer un test automatisé avec une analyse de couverture de code?<br>
 cmd terminal:<br>
-`vendor/bin/phpunit --coverage-html html --colors -v --testdox --stop-on-failure`<br><br>
+`vendor/bin/phpunit --coverage-html html --colors -v --testdox`<br><br>
 
 Comment rafraichir la base de données de test en cas de failure.<br>
 [copier coller l'ensemble en 1 bloc dans le terminal]<br><br>
