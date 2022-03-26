@@ -41,10 +41,11 @@ _Go with a console to the repository and do thoses commands_
 - `composer update`
 
 ETAPE 1 - Création de la BDD en locale.
->
--Configurer votre espace .env.local et .env.test
-eg:
-DATABASE_URL=mysql://userName:@127.0.0.1:3306/databaseName?serverVersion=5.7
+
+> xcvx
+> -Configurer votre espace .env.local et .env.test
+> eg:
+> DATABASE_URL=mysql://userName:@127.0.0.1:3306/databaseName?serverVersion=5.7
 
 eg:
 
