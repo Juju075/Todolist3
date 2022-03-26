@@ -137,13 +137,17 @@ Avant toute chose vous devez initialiser votre Serveur PHP local.
 
 - <b>AUTHENTIFICATION</b> <br/>
 
-Pour se connecter avec le<br/>
+Pour se connecter:<br/>
+ATTENTION VOUS AVEZ 2 ENVIRONNEMENT DE TRAVAIL.<br/>
+1 bdd standard<br/>
+2 bdd de test<br/>
+
 ["ROLE_ADMIN"]<br/>
-username:<br/>
+username: < pick your username in database > <br/>
 password: identique<br/><br/>
 
 ["ROLE_USER"]<br/>
-username:<br/>
+username:< pick your username in database > <br/>
 password: identique<br/><br/>
 
 TESTER LAPPLICATION<br/>
