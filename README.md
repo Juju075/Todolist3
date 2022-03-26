@@ -52,13 +52,6 @@ ETAPE 1 - Création de la BDD en locale.
 
 ETAPE 2 - Création d'un jeux de données.
 
-Saissisez ces cmd dans le terminal
-
-> symfony console doctrine:database:drop --force --env=test<br>
-> symfony console d:d:c --env=test<br>
-> symfony console d:s:u --force --env=test<br>
-> symfony console d:f:l --env=test --no-interaction<br>
-
 -<b>Methode 1</b> - Charger le script sql dans phpmyadmin (creation de la base de données et du jeux de donees.)
 
 Pour la BDD principale:
