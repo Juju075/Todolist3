@@ -89,11 +89,11 @@ Pour la BDD de test:
 
 ---
 
--<b>Methode 2 (Lancer un script)</b>
+-<b>Methode 2 (Lancer un script/fixture)</b>
 
-- Creation d'un jeux de donees via une fixture<br/>
+- Creation d'un jeux de donées via une fixture<br/>
 
-Apres avoir installe entierement le projet et installe les dependences.<br/>
+Après avoir installe entierement le projet et installe les dependences.<br/>
 lancer le Terminal et saisiser la commande suivante:<br/>
 
 php bin/console doctrine:fixtures:load --no-interaction<br/>
