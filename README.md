@@ -42,16 +42,16 @@ _Go with a console to the repository and do thoses commands_
 
 ETAPE 1 - Création de la BDD en locale.
 
-eg:
+> eg:
 
-> - Base de données : `toplist`
->   php bin/console doctrine:database:create
+- Base de données : `toplist`
+  php bin/console doctrine:database:create
 
-> - Crée le schema de la database.
->   php bin/console doctrine:migrations:migrate
+- Crée le schema de la database.
+  > php bin/console doctrine:migrations:migrate
 
-> Vous devez egalement creer la base de donnée de test
-> qui sera completer d'un jeu de données via la fixture.
+Vous devez egalement creer la base de donnée de test
+qui sera completer d'un jeu de données via la fixture.
 
 ETAPE
 Copy paste dans le terminal une foi
