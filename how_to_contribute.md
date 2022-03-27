@@ -17,13 +17,16 @@ Mais comment contribuer à un projet si nous n’avons pas les accès en écritu
 
 ## Proposez votre contribution via le pull request<br><br>
 
-<b>Le principe du pull request</b><br>
-Bien, vous avez poussé votre branche sur la copie du dépôt pour lequel vous souhaitez contribuer. Mais pour le moment, cette contribution n’est disponible que sur<br>
+<b>Le principe du pull request</b><br><br>
+
+Bien, vous avez poussé votre branche sur la copie du dépôt pour lequel vous souhaitez contribuer.<br>
+Mais pour le moment, cette contribution n’est disponible que sur<br>
 votre copie du dépôt. Pour faire en sorte de proposer vos évolutions au propriétaire du dépôt source, il faut utiliser une autre fonctionnalité de GitHub qui est<br>
 le pull request. Cela permet de notifier le propriétaire que vous avez une proposition de contribution. Comme votre dépôt est publique, le propriétaire peut alors<br>
 consulter ou même clone votre branche et ainsi relire et tester votre code.<br><br>
 
-Si votre contribution, lui convient, alors il peut directement l’intégrer dans son dépôt via un merge ou rebase + merge. Au contraire, si des choses ne vont pas dans<br>
+Si votre contribution, lui convient, alors il peut directement l’intégrer dans son dépôt via un merge ou rebase + merge.<br>
+Au contraire, si des choses ne vont pas dans<br>
 votre code, il peut échanger avec vous via un fil de discutions et ainsi vous permettre d’améliorer votre code.<br><br>
 
-Le pull request sur Github
+## <em>Le pull request sur Github</em>
