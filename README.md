@@ -7,9 +7,9 @@ Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnali
 ========= DOCUMENTATIONS CONNEXE ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
 
-## Veuillez telecharger les fichiers ci-dessous (à la racine du projet:)<br/>
+## Veuillez télecharger les fichiers ci-dessous (à la racine du projet:)<br/>
 
-Le manuel technique (implementation de l'authentification)<br/><br/>
+Le manuel technique (implementation de l'authentification).<br/><br/>
 Le rapport de couveture de code & l'analyse de performance
 La fiche de comment contribuer a un projet sur github?
 
