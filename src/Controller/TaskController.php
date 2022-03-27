@@ -99,10 +99,10 @@ class TaskController extends AbstractController
     #[IsGranted('TASK_DELETE', subject: 'task')]
     public function deleteTaskAction(Task $task)
     {
-            $this->em->remove($task);
-            $this->em->flush();
-            $this->addFlash('success', 'Task has been deleted.');
-            return $this->redirectToRoute('task_list');
+        $this->em->remove($task);
+        //$this->em->flush();
+        $this->addFlash('success', 'Task has been deleted.');
+        return $this->redirectToRoute('task_list');
     }
 
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
