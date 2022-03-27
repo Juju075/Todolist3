@@ -11,11 +11,9 @@ Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnali
 
 Le manuel technique (implementation de l'authentification)<br/><br/>
 
-1. [manuel_technique.pdf]
-
-1. [Pre required](#Pré-requis)
-1. [Installation](#Instalation)
-1. [Affichage de l'App](#use).
+1. [manuel_technique.pdf](#)
+1. [Installation](#)
+1. [Affichage de l'App](#).
 
 Le rapport d’audit de qualité de code et de performance (fichier au format PDF)<br/><br/> 2. [report.pdf]<br/>
 
