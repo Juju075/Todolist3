@@ -31,7 +31,7 @@ La fiche de comment contribuer a un projet sur github?<br/>
 
 Environnement
 
-- _PHP_ (7.4.12)
+- _PHP_ (8.0.2)
 - _Apache_ (2.4.46)
 - _MySQL_ (8.0.22)
 - _Composer_ (2.0.9)
