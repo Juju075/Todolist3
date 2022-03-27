@@ -10,14 +10,14 @@ Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnali
 ## Veuillez telecharger les fichiers ci-dessous (à la racine du projet:)<br/>
 
 Le manuel technique (implementation de l'authentification)<br/><br/>
+Le rapport de couveture de code & l'analyse de performance
+La fiche de comment contribuer a un projet sur github?
 
 1. [manuel_technique.pdf](#)
-1. [Installation](#)
-1. [Affichage de l'App](#).
+2. [report.pdf](#)
+3. [how_to_contribute.md](#).
 
-Le rapport d’audit de qualité de code et de performance (fichier au format PDF)<br/><br/> 2. [report.pdf]<br/>
-
-Comment contribuer au projet (fichier markdown “.md”)<br/><br/> 3. [how_to_contribute.md]<br/><br/>
+---
 
 ## Table des matières.
 
