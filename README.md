@@ -11,11 +11,11 @@ Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnali
 
 Le manuel technique (implementation de l'authentification)<br/><br/>
 
-1. [manuel_technique.pdf]<br/>
+1. [manuel_technique.pdf]
 
 Le rapport d’audit de qualité de code et de performance (fichier au format PDF)<br/><br/> 2. [report.pdf]<br/>
 
-## Comment contribuer au projet (fichier markdown “.md”) 3. [how_to_contribute.md]<br/><br/>
+Comment contribuer au projet (fichier markdown “.md”)<br/><br/> 3. [how_to_contribute.md]<br/><br/>
 
 ## Table des matières.
 
