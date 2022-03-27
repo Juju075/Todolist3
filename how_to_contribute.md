@@ -7,7 +7,7 @@ que vous pouvez avoir sur les différents dépôts hébergés sur la plateforme.
 
 ## Vous avez 3 principaux accès:<br><br>
 
-<b></b>1 - Les dépôts privés tiers:<br><br>
+<b>1 - Les dépôts privés tiers:</b><br><br>
 Vous n’avez aucun accès sur ces dépôts. Ce sont des dépôts privés qui appartiennent à d’autres personnes.<br>
 
 <b>2 - Vos dépôts et dépôts d’équipes:</b><br><br>
