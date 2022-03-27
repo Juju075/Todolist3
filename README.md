@@ -23,7 +23,7 @@ La fiche de comment contribuer a un projet sur github?<br/>
 
 1. [Pre required](#Pré-requis)
 2. [Installation](#Instalation)
-3. [Affichage de l'App](#use).
+3. [Utilisation de l'App](#use).
 4. [Bundles utilisé](#Fait-avec)
 5. [Auteur](#Auteur)
 
