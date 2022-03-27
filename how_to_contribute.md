@@ -7,13 +7,19 @@ que vous pouvez avoir sur les différents dépôts hébergés sur la plateforme.
 
 ## Vous avez 3 principaux accès:<br><br>
 
-Les dépôts privés tiers: Vous n’avez aucun accès sur ces dépôts. Ce sont des dépôts privés qui appartiennent à d’autres personnes.<br>
-Vos dépôts et dépôts d’équipes: Vous avez les accès en lecture et écriture. Cela correspond aux dépôts dont vous êtes le propriétaire ou pour lesquels vous faite partie de l’équipe.<br>
-Autres dépôts publiques: Vous avez uniquement les accès en lecture. Cela signifie que vous pouvez voir le contenu du dépôt et le cloner.<br>
-Mais vous ne pouvez pas pousser directement vos modifications.<br>
-Ce sont ces dépôts qui nous intéresse ici.<br><br>
+1 - Les dépôts privés tiers:<br><br>
+Vous n’avez aucun accès sur ces dépôts. Ce sont des dépôts privés qui appartiennent à d’autres personnes.<br><br><br>
 
-Mais comment contribuer à un projet si nous n’avons pas les accès en écriture? Et bien via le fork et le pull request que nous allons détailler tout de suite.<br>
+2 - Vos dépôts et dépôts d’équipes:<br><br>
+Vous avez les accès en lecture et écriture.
+Cela correspond aux dépôts dont vous êtes le propriétaire ou pour lesquels vous faite partie de l’équipe.<br><br><br>
+
+3 - Autres dépôts publiques:<br><br>
+Vous avez uniquement les accès en lecture. Cela signifie que vous pouvez voir le contenu du dépôt et le cloner.<br>
+Mais vous ne pouvez pas pousser directement vos modifications.<br>
+Ce sont ces dépôts qui nous intéresse ici.<br><br><br>
+
+<em>Mais comment contribuer à un projet si nous n’avons pas les accès en écriture? Et bien via le fork et le pull request que nous allons détailler tout de suite.</em><br><br>
 
 ## Proposez votre contribution via le pull request<br><br>
 
