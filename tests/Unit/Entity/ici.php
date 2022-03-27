@@ -2,60 +2,74 @@
 declare(strict_types = 1);
 namespace App\Tests\Unit\Entity;
 
-use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Faker;
+use App\Entity\Task;
+use App\Entity\User;
+use App\Tests\security\LoginAccount;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserEntityTest extends KernelTestCase
+/**
+ * Pupose check entity constraint.
+ * a voir probleme avec les chainages.
+ */
+class TaskEntityTest extends WebTestCase
 {
+    private $client;
+    
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->client = static::createClient();
+    }
+
+
     /**
      * Refactoring
      *
-     * @return void // manque return entity
+     * @return Task
      */
-    public function getEntity(): User
+    public function getEntity(): Task
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        $user = new User();
-        $user->setUsername($faker->name());
-        $user->setEmail($faker->email());
-        $user->setRoles(['ROLE_USER']) ;
-        $user->setPassword('identique') ;
-        $user->setCreatedAt(new \DateTime());
+        LoginAccount::LoginAsAdmin($this->client);
 
-        return $user;
+        //$account->getUserIdentifier();
 
-        // $user = (new User())
-        //     ->setUsername('ezerzerzerzer')
-        //     ->setPassword('')
-        // ;
-    }
+        $task = new Task();
+        $task->setTitle($faker->title());
+        $task->setContent($faker->text());
+        $task->setUser(1); //not blanck
+        $task->setCreatedAt(new \DateTime());
 
+        return $task; // resultat null ?
+    } 
+    
     /**
-     * Refactoring
+     * Undocumented function
      *
-     * @param User $user
+     * @param Task $task
      * @param integer $number
      * @return void
      */
-    public function assertHasErrors(User $user , int $number = 0)
+    public function assertHasErrors(Task $task, int $number = 0)
     {
         //on recupere le validateur.    
         self::bootKernel();
-        $error = self::getContainer()->get('validator')->validate($user);
+        $error = self::getContainer()->get('validator')->validate($task);
         $this->assertCount($number, $error);
-    }
+    }    
 
+    // =======================================================================
+    // test correct entity | 
+    // ======================================================================= 
     public function testValidEntity(): void
     {
-        $this->assertHasErrors($this->getEntity(),0); //expected entity found void
+        $this->assertHasErrors($this->getEntity(),0);
     }
 
+    // =======================================================================
+    //  test constaint lengh | 
+    // =======================================================================   
 
-    public function testInvalidValidEntity(): void 
-    {
-        //Overiding (username) contrainte +3 caract
-        $this->assertHasErrors($this->getEntity()->setUsername('ab'), 1);
-    }
 }

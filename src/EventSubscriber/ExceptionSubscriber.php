@@ -5,12 +5,10 @@ namespace App\EventSubscriber;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpClient\Exception\RedirectionException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
