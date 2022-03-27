@@ -7,7 +7,7 @@ block body %}
   </div>
   {% endif %}{% if app.user %}
   <div class="mb-3">
-    You are logged in as {{ app.user.username }},
+    <h2>You are logged in as {{ app.user.username }},</h2>
     <a href="{{ path('app_logout') }}">Logout</a>
   </div>
   {% endif %}
@@ -30,7 +30,6 @@ block body %}
     name="password"
     id="inputPassword"
     class="form-control"
-    autocomplete="current-password"
     required
   />
 

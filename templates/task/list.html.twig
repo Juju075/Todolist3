@@ -17,8 +17,6 @@
           {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{%
           else %}<span class="glyphicon glyphicon-remove"></span>{% endif %}
         </h4>
-
-        Edit - Conditionner avec un twig is_granted(voter)
         <h4>
           <a href="{{ path('task_edit', { id: task.id }) }}">{{
             task.title
@@ -28,15 +26,12 @@
         <p>{{ task.content }}</p>
       </div>
       <div>
-        Toggle - Conditionner avec un twig is_granted(voter)
         <form action="{{ path('task_toggle', { id: task.id }) }}">
           <button class="btn btn-success btn-sm pull-right">
             {% if not task.isDone %}Mark as done{% else %}Marquer non terminée{%
             endif %}
           </button>
         </form>
-
-        Delete - Conditionner avec un twig is_granted(voter)
         <form action="{{ path('task_delete', { id: task.id }) }}">
           <button class="btn btn-danger btn-sm pull-right">Delete</button>
         </form>

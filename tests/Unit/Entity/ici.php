@@ -39,7 +39,7 @@ class TaskEntityTest extends WebTestCase
         $task = new Task();
         $task->setTitle($faker->title());
         $task->setContent($faker->text());
-        $task->setUser(1); //not blanck
+        $task->setUser(1); //not blanck                       
         $task->setCreatedAt(new \DateTime());
 
         return $task; // resultat null ?
