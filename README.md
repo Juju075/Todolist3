@@ -7,8 +7,8 @@ Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnali
 ========= DOCUMENTATIONS CONNEXE ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
 
-Veuillez telecharger le fichier cidessous la racine du projet:<br/>
-.pdf
+Veuillez telecharger le fichier cidessous (à la racine du projet:)<br/>
+manuel_technique.pdf
 
 ====================
 
