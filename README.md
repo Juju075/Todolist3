@@ -4,8 +4,8 @@ Project 8 du parcours de développeur d'application PHP/Symfony d'Openclassrooms
 Ce projet consite à l'amélioration d'une application déjà existante.<br/>
 Migration de symfony 2 à symfony 6, correction des erreurs PHP et implémentation de nouvelle fonctionnalités.</br></br>
 
-Mise en place de tests automatisés</br>
-Audit de qualite de code et de perfomance.
+Mise en place de tests automatisés</br></br>
+Audit de qualite de code et de perfomance.</br>
 
 # QuickStart
 
@@ -14,8 +14,8 @@ https://127.0.0.1:8000/</br>
 https://127.0.0.1:8000/login</br>
 https://127.0.0.1:8000/admin</br>
 
-Tests automatisé
-`vendor/bin/phpunit --coverage-html html --colors -v --testdox`
+Tests automatisé</br></br>
+`vendor/bin/phpunit --coverage-html html --colors -v --testdox` </br>
 (ATTENTION DAMABUNDLE semble deprecié, désactiver le flush() de la methode DELETE)</br>
 
 TaskController ligne 103 //flush()</br>
