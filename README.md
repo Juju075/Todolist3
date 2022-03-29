@@ -7,7 +7,7 @@ Migration de symfony 2 à symfony 6, correction des erreurs PHP et implémentati
 Mise en place de tests automatisés</br>
 Audit de qualite de code et de perfomance.
 
-========= DOCUMENTATIONS CONNEXE ===========</br></br>
+========= <b>DOCUMENTATIONS CONNEXE</b> ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
 
 ## Veuillez télecharger les fichiers ci-dessous (à la racine du projet:)<br/>
