@@ -7,6 +7,13 @@ Migration de symfony 2 à symfony 6, correction des erreurs PHP et implémentati
 Mise en place de tests automatisés</br>
 Audit de qualite de code et de perfomance.
 
+# QuickStart
+
+Acceder au site depuis votre navigateur:</br>
+https://127.0.0.1:8000/</br>
+https://127.0.0.1:8000/login</br>
+https://127.0.0.1:8000/admin</br>
+
 ========= <b>DOCUMENTATIONS CONNEXE</b> ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
 
@@ -144,9 +151,9 @@ Avant toute chose vous devez initialiser votre Serveur PHP local.
 - <b>AUTHENTIFICATION</b> <br/>
 
 Pour se connecter:<br/>
-ATTENTION VOUS AVEZ 2 ENVIRONNEMENTs DE TRAVAIL.<br/>
-1 bdd standard<br/>
-2 bdd de test<br/>
+ATTENTION VOUS AVEZ 2 ENVIRONNEMENTS DE TRAVAIL.<br/>
+1-bdd standard<br/>
+2-bdd de test<br/>
 
 ["ROLE_ADMIN"]<br/>
 username: < pick your username in database > <br/>
