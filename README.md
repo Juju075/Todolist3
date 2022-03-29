@@ -14,6 +14,17 @@ https://127.0.0.1:8000/</br>
 https://127.0.0.1:8000/login</br>
 https://127.0.0.1:8000/admin</br>
 
+Tests automatisé
+`vendor/bin/phpunit --coverage-html html --colors -v --testdox`
+(ATTENTION DAMABUNDLE semble deprecié, désactiver le flush() de la methode DELETE)</br>
+
+TaskController ligne 103 //flush()</br>
+pour ne pas impacter la bdd de test.</br>
+ou supprimer recreer la bdd de test a chaque nouveau RUN</br>
+voir les cmd terminal en fin de read me</br></br>
+
+Désole ceci n'est pas de ma faute (DamaBundle)</br>
+
 ========= <b>DOCUMENTATIONS CONNEXE</b> ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
 
