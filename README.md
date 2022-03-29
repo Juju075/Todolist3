@@ -1,8 +1,11 @@
 ## P8_TodoList
 
-Project 8 du parcours développeur d'application PHP/Symfony d'Openclassrooms.<br/><br/>
+Project 8 du parcours de développeur d'application PHP/Symfony d'Openclassrooms.<br/><br/>
 Ce projet consite à l'amelioration d'une application déjà existante.<br/>
-Mise a jour de symfony corrigé les bugs et implementer de nouvelle fonctionnalités.
+Migration de symfony 2 à symfony 6, correction des erreurs PHP et implementation de nouvelle fonctionnalités.</br></br>
+
+Mise en place de tests automatisés</br>
+Audit de qualite de code et de perfomance.
 
 ========= DOCUMENTATIONS CONNEXE ===========</br></br>
 <b>Manuel technique de l'implementation de l'authentification</b>
