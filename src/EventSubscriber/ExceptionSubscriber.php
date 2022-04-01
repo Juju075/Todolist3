@@ -3,18 +3,26 @@ declare(strict_types = 1);
 namespace App\EventSubscriber;
 
 use InvalidArgumentException;
+
+//
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\KernelEvents;
-
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
+
+//
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+// Listener methods
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 /**
  * Symfony Componet Http...
+ * https://symfony.com/doc/current/event_dispatcher.html#creating-an-event-listener
  */
 class ExceptionSubscriber implements EventSubscriberInterface
 {
@@ -33,14 +41,19 @@ class ExceptionSubscriber implements EventSubscriberInterface
      * @param ExceptionEvent $event 
      * @return void
      */
-    public function onKernelException(ExceptionEvent $event): RedirectResponse 
+    public function onKernelException(ExceptionEvent $event)
     {
+
+            // Customize your response object to display the exception details
             $response = new Response();
+            //Recuperer le type d'exepction
             $exception = $event->getThrowable();
 
             switch ($exception) {
                 case $exception instanceof NotFoundHttpException:
+                    //status
                     $response->setStatusCode(Response::HTTP_NOT_FOUND);
+                    //message
                     $response->setContent('code: 404 message: Resource not found'); 
                     break;
                 case $exception instanceof AccessDeniedException: // Voter Redirection avec Flash message
@@ -58,15 +71,14 @@ class ExceptionSubscriber implements EventSubscriberInterface
                 default:
                     $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
-                    $response->setContent('code: 500 message: Internal Server Error'); 
-
-                    $url = '/';
-                    //return new RedirectResponse($this->generateUrl('homepage'));
-                    return new RedirectResponse('homepage');
+                    $response->setContent('code: 403 message: Access denied'); 
 
                 break;
             }
 
+            //sends the modified response object to the event
+            //ExceptionEvent $event
+            //setResponse()
             $event->setResponse($response);
     }
 
