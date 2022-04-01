@@ -26,12 +26,20 @@ class UserType extends AbstractType
                 'second_options' => ['label' => 'Type your password'],
             ])
             ->add('email', EmailType::class, ['label' => 'Email'])
+
+
+
             ->add('roles', ChoiceType::class, [
                 'label'    => 'Select for Admin.',
-                'choices' =>['OUI' =>true, 'NON' =>false],
+                'choices' =>[
+                    'Yes' => true,
+                    'No' => false,
+                ],
                 'required' => false,
                 'mapped' => false,
             ])
+
+
             ;
     }
 

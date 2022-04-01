@@ -34,15 +34,20 @@ class TaskEntityTest extends WebTestCase
 
         LoginAccount::LoginAsAdmin($this->client);
 
-        //$account->getUserIdentifier();
-
+        //on recuper le user (service container).
+        $user = self::getContainer()
+            ->get('doctrine')
+            ->getRepository(User::class)
+            ->findOneByEmail('admin@todolist.com')
+            ;
+        
         $task = new Task();
         $task->setTitle($faker->title());
         $task->setContent($faker->text());
-        $task->setUser(1); //not blanck                       
+        $task->setUser($user);                  
         $task->setCreatedAt(new \DateTime());
 
-        return $task; // resultat null ?
+        return $task; 
     } 
     
     /**
@@ -54,7 +59,7 @@ class TaskEntityTest extends WebTestCase
      */
     public function assertHasErrors(Task $task, int $number = 0)
     {
-        //on recupere le validateur.    
+        //on recupere le validateur.(service container).    
         self::bootKernel();
         $error = self::getContainer()->get('validator')->validate($task);
         $this->assertCount($number, $error);

@@ -28,6 +28,8 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
             $user->setPassword($this->passwordHasher->hashPassword($user, 'identique'));
             $user->setEmail($faker->email($faker->email()));
             
+            //Ajouter 'ROLE_ANONYMOUS']
+
             //Overriding.
             if ($nbUser === 1) {
                 $user->setRoles(['ROLE_ADMIN']);
@@ -47,7 +49,7 @@ class UsersFixtures extends Fixture implements FixtureGroupInterface
     /**
      * Implementation de FixtureGroupInterface
      * C une methode static on y accede par UsersFixtures::getGroup();
-     * Avanage pas besoin d'instanciation.
+     * AvanTage pas besoin d'instanciation.
      *
      * @return Array
      */

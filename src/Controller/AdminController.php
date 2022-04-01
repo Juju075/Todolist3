@@ -51,17 +51,26 @@ class AdminController extends AbstractController
 
         $form->handleRequest($request);
 
+        //Ou sont les valeurs de la checkbox. 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            if ('$ChoiceType' === true) {
+            
+            //recuperer la valeur du checkbox dans le post
+            $choiceType = $form->getData()->getRoles(); //UserType
+            dd($choiceType); //choices
+            //$choiceType = $form->get('roles');
+
+            //ne fonctionne pas choices
+            if ($choiceType === true) {
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
                 $user->setRoles(['ROLE_USER']);
             }
        
             $this->em->persist($user);
-            $this->em->flush();
+            //$this->em->flush();
             $this->addFlash('success', 'New User has been added.');
             return $this->redirectToRoute('app_admin_users_list');
         }

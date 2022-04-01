@@ -15,6 +15,7 @@ class TasksFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
         
+
         for ($nbUser = 1; $nbUser <5 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
         

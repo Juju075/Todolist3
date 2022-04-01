@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -12,6 +13,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
+/**
+ * Symfony Componet Http...
+ */
 class ExceptionSubscriber implements EventSubscriberInterface
 {
     
@@ -23,14 +27,14 @@ class ExceptionSubscriber implements EventSubscriberInterface
     }
 
 
-
     /**
      * pour app normal return Response   $response = new JsonResponse();
      *
      * @param ExceptionEvent $event 
      * @return void
      */
-    public function onKernelException(ExceptionEvent $event) {
+    public function onKernelException(ExceptionEvent $event): RedirectResponse 
+    {
             $response = new Response();
             $exception = $event->getThrowable();
 
@@ -55,6 +59,11 @@ class ExceptionSubscriber implements EventSubscriberInterface
                     $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
                     $response->setContent('code: 500 message: Internal Server Error'); 
+
+                    $url = '/';
+                    //return new RedirectResponse($this->generateUrl('homepage'));
+                    return new RedirectResponse('homepage');
+
                 break;
             }
 
@@ -68,5 +77,6 @@ class ExceptionSubscriber implements EventSubscriberInterface
             KernelEvents::EXCEPTION => ['onKernelException', 10],
         ];    
     }    
+
 }
 

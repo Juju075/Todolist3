@@ -16,13 +16,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    /**
-     * pour la checkbox 0 ou 1
-     */
-    // const ROLES = [
-    //     0 => 'ROLE_USER',
-    //     1 => 'ROLE_ADMIN'
-    // ];
+
 
     use Timestampable;      
 
@@ -47,7 +41,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: 'Le format de l\'adresse n\'est pas correcte.')]
     private $email;
 
-
+    /**
+     * pour la checkbox 0 ou 1
+     */
+    // const ROLES = [
+    //     0 => ['ROLE_USER'],
+    //     1 => ['ROLE_ADMIN']
+    // ];
+    
     #[ORM\Column(type: 'json')]
     private $roles = [];
 

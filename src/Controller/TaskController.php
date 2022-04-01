@@ -60,7 +60,6 @@ class TaskController extends AbstractController
 
             return $this->redirectToRoute('task_list');
         }
-
         return $this->renderForm('task/create.html.twig', ['form'=> $form,]);
     }
 
@@ -77,7 +76,6 @@ class TaskController extends AbstractController
 
             return $this->redirectToRoute('task_list');
         }
-
         return $this->renderForm('task/edit.html.twig', ['form'=> $form,'task' => $task]);
     }
 
@@ -89,11 +87,13 @@ class TaskController extends AbstractController
     {
         $task->toggle(!$task->isDone());
         $this->em->flush();
-
         $this->addFlash('success', sprintf('Task %s has been toogle.', $task->getTitle()));
-
         return $this->redirectToRoute('task_list');
     }
+
+
+    //Access Denied by controller annotation @IsGranted("TASK_DELETE", task)
+    //Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
 
     #[Route("/tasks/{id}/delete", name: "task_delete")]
     #[IsGranted('TASK_DELETE', subject: 'task')]
@@ -104,10 +104,16 @@ class TaskController extends AbstractController
         $this->addFlash('success', 'Task has been deleted.');
         return $this->redirectToRoute('task_list');
     }
+    
 
+
+
+
+
+
+    //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
     #[IsGranted('TASK_TOGGLE' , subject: 'task')]
-    //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     public function allIsdoneTask(TaskRepository $taskRepo) 
     {
         return $this->render('task/isdoneList.html.twig', ['lists' => $taskRepo->findBy(['isdone'=> true])]) ;

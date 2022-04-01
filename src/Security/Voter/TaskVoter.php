@@ -71,7 +71,7 @@ class TaskVoter extends Voter
 
                 break;
             case self::TOGGLE:
-                //On vérifie si on peut validé.               
+                //On vérifie si on peut valider.               
                 return $this->userCanToggle($task, $user);
                 break;
         }

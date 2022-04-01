@@ -20,10 +20,19 @@ services:
       - "../src/Entity/"
       - "../src/Kernel.php"
 
-  # add more service definitions when explicit configuration is needed
-  # please note that last definitions always *replace* previous ones
+  # ADD MORE SERVICE
+
+  # [Voter] To inject the voter into the security layer.
+  # The registered voter will always be asked as soon as the method isGranted()
+  # from the security context is called.
+  security.access.task_voter:
+    class: App\Security\Voter\TaskVoter
+    public: false
+    tags:
+      - { name: security.voter }
 
   # [ Exception ] Activation de ExceptionSubscriber
-  # App\EventSubscriber\ExceptionSubscriber:
-  #   tags:
-  #     - { name: kernel.event_listener, event: kernel.exception }
+  App\EventSubscriber\ExceptionSubscriber:
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception }
+
