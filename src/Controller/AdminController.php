@@ -59,7 +59,7 @@ class AdminController extends AbstractController
             
             //recuperer la valeur du checkbox dans le post
             $choiceType = $form->getData()->getRoles(); //UserType
-            dd($choiceType); //choices
+            dump($choiceType); //choices
             //$choiceType = $form->get('roles');
 
             //ne fonctionne pas choices
