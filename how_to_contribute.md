@@ -1,3 +1,17 @@
+Contribution Guide
+How to contribute to the project:
+Make a fork of the project Github directory
+
+Follow the README after come back here
+
+Create a branch
+
+git checkout -b new-branch
+Push the branch on your fork
+
+git push origin new-branch
+Open a pull request on the Github directory of project
+
 Source: http://codeur-pro.fr/contribuer-a-un-projet-open-source-sur-github/#:~:text=Pour%20contribuer%20%C3%A0%20un%20projet,sur%20la%20copie%20du%20d%C3%A9p%C3%B4t.
 
 # <b>Les droits d’accès sur GitHub</b><br>

@@ -53,16 +53,11 @@ class AdminController extends AbstractController
 
         //Ou sont les valeurs de la checkbox. 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            
-            //recuperer la valeur du checkbox dans le post
-            $choiceType = $form->getData()->getRoles(); //UserType
-            dump($choiceType); //choices
-            //$choiceType = $form->get('roles');
 
-            //ne fonctionne pas choices
+            $choiceType = $form->get('roles')->getData();
             if ($choiceType === true) {
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
@@ -70,7 +65,7 @@ class AdminController extends AbstractController
             }
        
             $this->em->persist($user);
-            //$this->em->flush();
+            $this->em->flush();
             $this->addFlash('success', 'New User has been added.');
             return $this->redirectToRoute('app_admin_users_list');
         }
@@ -88,7 +83,15 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
-            //$this->em->flush();
+
+            $choiceType = $form->get('roles')->getData();
+            if ($choiceType === true) {
+                $user->setRoles(['ROLE_ADMIN']);
+            }else{
+                $user->setRoles(['ROLE_USER']);
+            }
+
+            $this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été modifié');
             return $this->redirectToRoute('app_admin_users_list');
         }    
