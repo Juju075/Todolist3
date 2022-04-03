@@ -1,6 +1,6 @@
 {% extends "layouts/base.html.twig" %} {% block title %}Page Acces Refuse{%
 endblock %} {% block body %}
-<h1>
-  <p>vous n'etes pas auhorise pour consulte cette ressource</p>
-</h1>
+<h1>Your acces is denied youre unauthorized.</h1>
+<p><a href="{{ path('homepage') }}">Back Homepage</a></p>
+{{ dump() }}
 {% endblock %}
