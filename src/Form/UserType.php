@@ -27,8 +27,6 @@ class UserType extends AbstractType
             ])
             ->add('email', EmailType::class, ['label' => 'Email'])
 
-
-
             ->add('roles', ChoiceType::class, [
                 'label'    => 'Select for Admin.',
                 'choices' =>[
@@ -37,10 +35,7 @@ class UserType extends AbstractType
                 ],
                 'required' => false,
                 'mapped' => false,
-            ])
-
-
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -35,6 +35,11 @@ class ExceptionSubscriber implements EventSubscriberInterface
     }
 
 
+    public function onRedirectionClient(): RedirectResponse
+    {
+        return new RedirectResponse('homepage');
+    }
+
     /**
      * pour app normal return Response   $response = new JsonResponse();
      *
@@ -43,25 +48,31 @@ class ExceptionSubscriber implements EventSubscriberInterface
      */
     public function onKernelException(ExceptionEvent $event)
     {
-
-            // Customize your response object to display the exception details
             $response = new Response();
+
             //Recuperer le type d'exepction
             $exception = $event->getThrowable();
 
+            dump('ceci est l\'event subscriber');
+            dump($exception);
+
             switch ($exception) {
                 case $exception instanceof NotFoundHttpException:
+                    dump('Type: NotFoundHttpException');
+
                     //status
                     $response->setStatusCode(Response::HTTP_NOT_FOUND);
                     //message
                     $response->setContent('code: 404 message: Resource not found'); 
                     break;
                 case $exception instanceof AccessDeniedException: // Voter Redirection avec Flash message
+                    dump('Type: AccessDeniedException');
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
                     $response->setContent('code: 403 message: Forbiden'); 
                     $response = $this->client->request('GET', '/');
                     break;
                 case $exception instanceof InvalidArgumentException:
+                    dump('Type: InvalidArgumentException');
                     $code = $response->setStatusCode($exception->getCode());
                     //$response->setData($exception->getMessage());
                     $message = null;
@@ -69,11 +80,11 @@ class ExceptionSubscriber implements EventSubscriberInterface
                     break;
 
                 default:
+                    dump('Type: NotFoundHttpException');
                     $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
-                    $response->setContent('code: 403 message: Access denied'); 
+                    break;
 
-                break;
             }
 
             //sends the modified response object to the event
@@ -86,7 +97,8 @@ class ExceptionSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): Array 
     {
         return [
-            KernelEvents::EXCEPTION => ['onKernelException', 10],
+            //KernelEvents::EXCEPTION => ['onKernelException', 10],
+            KernelEvents::EXCEPTION => ['onRedirectionClient', 10],
         ];    
     }    
 

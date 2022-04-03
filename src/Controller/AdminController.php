@@ -57,8 +57,7 @@ class AdminController extends AbstractController
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $choiceType = $form->get('roles')->getData();
-            if ($choiceType === true) {
+            if ($form->get('roles')->getData() === true) {
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
                 $user->setRoles(['ROLE_USER']);
@@ -84,13 +83,11 @@ class AdminController extends AbstractController
             $password = $this->userPasswordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($password);
 
-            $choiceType = $form->get('roles')->getData();
-            if ($choiceType === true) {
+            if ($form->get('roles')->getData() === true) {
                 $user->setRoles(['ROLE_ADMIN']);
             }else{
                 $user->setRoles(['ROLE_USER']);
             }
-
             $this->em->flush();
             $this->addFlash('success', 'L\'utilisateur a bien été modifié');
             return $this->redirectToRoute('app_admin_users_list');
