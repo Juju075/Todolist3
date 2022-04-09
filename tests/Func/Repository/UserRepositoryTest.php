@@ -18,6 +18,10 @@ private $entityManager ;
             ->getManager();
     }
 
+
+    // ----------------------------------------------------------------------
+    // UserRepository::setCreatedAt()| Assert | [X] Validé
+    // ----------------------------------------------------------------------
     //test de querie
     public function testSearchUser(): void
     {
@@ -26,6 +30,6 @@ private $entityManager ;
             ->getRepository(User::class) 
             ->findOneByEmail('admin@todolist.com');
 
-        $this->assertSame('sabine.lemaire', $user->getUsername());
+        $this->assertSame('timothee93', $user->getUsername());
     }
 }

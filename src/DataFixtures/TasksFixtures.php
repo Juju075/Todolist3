@@ -14,7 +14,6 @@ class TasksFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
-        
 
         for ($nbUser = 1; $nbUser <5 ; $nbUser++) { 
             $user = $this->getReference('user_'.$nbUser);
@@ -28,6 +27,17 @@ class TasksFixtures extends Fixture implements DependentFixtureInterface
             $user->addTask($task);
             $manager->persist($task);
             }
+        }
+        $manager->flush();
+
+        //Ajout 4 task anonymes
+        for ($i=0; $i <5 ; $i++) { 
+            $task = new Task();
+            $task->setTitle($faker->word());
+            $task->setContent($faker->text(250));
+            $task->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'));
+            $user->addTask($task);
+            $manager->persist($task);
         }
         $manager->flush();
     }

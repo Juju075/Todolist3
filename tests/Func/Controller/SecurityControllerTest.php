@@ -31,7 +31,6 @@ class SecurityControllerTest extends WebTestCase
     // =======================================================================
     // LOGIN AS USER  + variations. | Email & Password - input[type=submit] - Validé
     // =======================================================================    
-    // 1 - Expected: 200 with User ['ROLE_USER'] Good credentials.
     public function testLoginWithUser(): void
     {
         $crawler = $this->client->request('GET', 'login');
@@ -133,7 +132,7 @@ class SecurityControllerTest extends WebTestCase
     }
     
     // =======================================================================
-    // LOGOUT + variations.
+    // SecurityController::login() | Assert |
     // =======================================================================
     
     // 1 - Expected: 200 with User ['ROLE_ADMIN']
@@ -145,6 +144,19 @@ class SecurityControllerTest extends WebTestCase
         //click link 'Logout'
         //assert text containt 'Homepage'
       }
+
+    // =======================================================================
+    // SecurityController::logout() | Assert (declencher une exception)|
+    // =======================================================================
+    public function testLogoutException()
+    {
+        loginAccount::LoginAsUser($this->client);
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+        $crawler = $this->client->request('GET', 'logout');
+
+        //it will be intercepted by the logout key on your firewall.
+    }
+
 }
 
 

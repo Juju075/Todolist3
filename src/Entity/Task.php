@@ -40,7 +40,7 @@ class Task
     private $isDone;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'task')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $user;
 
     public function __construct()

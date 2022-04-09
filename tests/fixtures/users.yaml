@@ -1,6 +1,0 @@
-#fixtures/users.yaml
-#https://blog.gary-houbre.fr/developpement/symfony/symfony-creer-des-fixtures-avec-alice-bundle
-
-App\Entity\User:
-  code:
-  expired_at: <dateTime("+1 year")

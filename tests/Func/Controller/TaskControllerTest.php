@@ -19,13 +19,25 @@ class TaskControllerTest extends WebTestCase
     
     public function setUp(): void
     {
+        parent::setUp();
         $this->client = static::createClient();
         $this->faker = Faker\Factory::create('fr_FR');
     }
 
-    // =======================================================================
-    // Tests Home Page + variations. Validé
-    // =======================================================================
+    // ----------------------------------------------------------------------
+    // TaskController::index() | Assert | [X] Validé.
+    // ----------------------------------------------------------------------
+    public function testHomepage(): void
+    {
+        $this->client->request('GET', '/');
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertSelectorTextContains('h1', 'Homepage'); 
+    }
+
+    // ----------------------------------------------------------------------
+    // TaskController::listAction() |  | [X] Validé.
+    // Assert:
+    // ----------------------------------------------------------------------
     public function testlistAction(): void
     {
         LoginAccount::LoginAsUser($this->client);
@@ -35,13 +47,22 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h1', 'Task list'); 
     }
 
+    // ----------------------------------------------------------------------
+    // TaskController::listTerminatedAction() | Assert | [X] Validé.
+    // Assert:
+    // ---------------------------------------------------------------------- 
+    public function testIsTaskTerminated(): void
+    {
+        //isdonelist.html.twig
+        $this->client->request('GET', '/task/isdone');
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertSelectorTextContains('h1', 'Tasks Terminated'); 
+    }
 
-    // =======================================================================
-    // Tests Fonctionnalities - CRUD - Voter TaskVoter.php + variations.
-    // =======================================================================
 
     // ----------------------------------------------------------------------
     // CREATE ACTION. Title & Content | <>Form Label & Input (for= name=) - validé
+    // Assert:
     // ----------------------------------------------------------------------
     public function testCreateActionWithAdmin(): void
     {
@@ -85,7 +106,8 @@ class TaskControllerTest extends WebTestCase
     }
     
     // ----------------------------------------------------------------------
-    // EDIT ACTION. | Validé
+    // TaskController:: | Assert | [X] Validé.
+    // Assert:
     // ----------------------------------------------------------------------
     public function testEditTaskAction(): void
     {
@@ -121,24 +143,24 @@ class TaskControllerTest extends WebTestCase
     }   
 
     // ----------------------------------------------------------------------
-    // DELETE ACTION. | Validé
+    // TaskController:: | Assert | [X] Validé.
+    // Assert:
     // ----------------------------------------------------------------------
-    // 1 - Expected: 200 OK with authorized User.
-    public function testDeleteTaskAction()
-    {  
-        LoginAccount::LoginAsAdmin($this->client);
-        $crawler = $this->client->request('GET', '/tasks/27/delete');
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
-        $crawler = $this->client->followRedirect();
+    // public function testDeleteTaskAction(): void
+    // {  
+    //     LoginAccount::LoginAsAdmin($this->client);
+    //     $crawler = $this->client->request('GET', '/tasks/27/delete');
+    //     $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+    //     $crawler = $this->client->followRedirect();
 
-        $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
-        $this->assertSelectorTextContains('h1', 'Task list');     
-    }    
+    //     $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
+    //     $this->assertSelectorTextContains('h1', 'Task list');     
+    // }   
 
     // ----------------------------------------------------------------------
-    // TOOGLE ACTION. | Validé
+    // TaskController:: | Assert | [X] Validé.
+    // Assert:
     // ----------------------------------------------------------------------
-    // 1 - 
     public function testToggleTaskAction(): void
     {
         LoginAccount::LoginAsAdmin($this->client);   
@@ -152,10 +174,23 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('div.alert-success')->count());
 
     }
-    public function testToogle()
+    public function testToogle(): void
     {
         LoginAccount::LoginAsUser($this->client);
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
         //click button action {od}
+    }
+    // ----------------------------------------------------------------------
+    // TaskController::llIsdoneTask() | Assert | [ ] .
+    // Assert:
+    // ----------------------------------------------------------------------  
+    public function testallIsdoneTask(): void
+    {
+        LoginAccount::LoginAsAdmin($this->client);
+        $crawler = $this->client->request('GET', '/task/isdone');
+        
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
+        $this->assertSelectorTextContains('h1', 'Tasks Terminated'); 
+
     }
 }

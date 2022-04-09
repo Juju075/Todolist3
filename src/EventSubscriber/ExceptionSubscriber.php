@@ -43,42 +43,30 @@ class ExceptionSubscriber extends AbstractController implements EventSubscriberI
      */
     public function onKernelException(ExceptionEvent $event)
     {
-        //redirectToRoute is the shortcut to error page:
-            $response = new RedirectResponse($this->generateUrl('homepage'));
-
-            $exception = $event->getThrowable();
+        $exception = $event->getThrowable();       
+        //$response = new RedirectResponse($this->generateUrl('task_list').'/error='.$exception->getCode());
+        $response = new RedirectResponse($this->generateUrl('task_list'));
 
             switch ($exception) {
-                case $exception instanceof NotFoundHttpException:
-                    dump('Case_Type:01 NotFoundHttpException');
-                    //status
+                case $exception instanceof NotFoundHttpException: //Ne redirige pas (passe pas par le voter.)
                     $response->setStatusCode(Response::HTTP_NOT_FOUND);
-                    //message
-                    $response->setContent('code: 404 message: Resource not found'); 
-                    //url de redirection error404.html.twig
+
                 break;
 
-                case $exception instanceof AccessDeniedException: 
-                    dump('Case_Type:02 AccessDeniedException');
+                case $exception instanceof AccessDeniedException: //ok redirige
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
                     $response->setContent('code: 403 message: Forbiden'); 
-                    //url de redirection error403.html.twig
                 break;
 
                 case $exception instanceof InvalidArgumentException:
-                    dump('Case_Type:03 InvalidArgumentException');
                     $code = $response->setStatusCode($exception->getCode());
-                    //$response->setData($exception->getMessage());
                     $message = null;
                     $response->setContent('code:'.$code.'message:'.$message);
-                    //url de redirection errorInvalidArgument.html.twig
-                    break;
+                break;
                     
-                    default:
-                    dump('Case_Type:Default Internal error 500');
+                default:
                     $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
                     $response->setStatusCode(Response::HTTP_FORBIDDEN);
-                    //url de redirection error500.html.twig
                 break;
 
             }

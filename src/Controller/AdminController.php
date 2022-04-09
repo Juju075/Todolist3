@@ -94,11 +94,4 @@ class AdminController extends AbstractController
         }    
         return $this->render('admin/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }    
-
-
-    #[Route('/user/{id}/show', name: 'app_admin_user_show')]
-   public function showAction(User $user, Request $request)
-   {
-
-   }
 }

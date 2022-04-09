@@ -31,19 +31,13 @@ class TaskController extends AbstractController
         return $this->render('default/index.html.twig');
     }
 
-    #[Route("/tasks", name: "task_list")]
+    #[Route('/tasks', name: 'task_list')]
     public function listAction(TaskRepository $taskRepo)
     {
+        //param declenche une alert twig
         return $this->render('task/list.html.twig', ['tasks' => $taskRepo->findAll()]);
     }
- 
-    #[Route("/task/isdone", name: "task_list_terminated")]
-    public function listTerminatedAction(TaskRepository $taskRepo)
-    {
-        return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
-    }
-    
-    
+
     #[Route("/tasks/create", name: "task_create")]
     public function createAction(Request $request)
     {
@@ -79,7 +73,6 @@ class TaskController extends AbstractController
         return $this->renderForm('task/edit.html.twig', ['form'=> $form,'task' => $task]);
     }
 
-
     //#[IsGranted('ROLE_USER', subject: 'task', statusCode: 403)]
     #[Route("/tasks/{id}/toggle", name: "task_toggle")]
     #[IsGranted('TASK_TOGGLE', subject: 'task', statusCode: 403)]
@@ -91,7 +84,6 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
     }
 
-
     //Access Denied by controller annotation @IsGranted("TASK_DELETE", task)
     //Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
 
@@ -100,16 +92,17 @@ class TaskController extends AbstractController
     public function deleteTaskAction(Task $task)
     {
         $this->em->remove($task);
-        $this->em->flush();
+        //$this->em->flush();
         $this->addFlash('success', 'Task has been deleted.');
         return $this->redirectToRoute('task_list');
     }
-    
+   
 
-
-
-
-
+    #[Route("/task/isdone", name: "task_list_terminated")]
+    public function listTerminatedAction(TaskRepository $taskRepo)
+    {
+        return $this->render('task/isdonelist.html.twig', ['tasks' => $taskRepo->findby([])]); //critere toogle a true
+    }  
 
     //#[Entity('task', expr: 'repository.findBySlug(article_slug)')]
     #[Route("/task/isdone", name: "task_isdone", methods: "GET")]
