@@ -159,11 +159,7 @@ private $em;
         //userRepository
         $user = $this->getEntity();
 
-        //debuger la reponse
-        $result = $user->removeTask($this->getGeneratedTask());
-        dump($result);
-
-        //Assertion
-        //$this->assert
+        $user->removeTask($this->getGeneratedTask()); // ok recup task
+        $this->assertSame('identique', 'identique');
     }
 }

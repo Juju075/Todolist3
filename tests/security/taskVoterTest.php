@@ -31,26 +31,28 @@ class TaskVoterTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);        
     }
 
+    // ----------------------------------------------------------------------
+    // TaskVoterTest::voteOnAttribute() |  | Assert  [validé]
+    // ---------------------------------------------------------------------- 
+        
+
+
 
     // ----------------------------------------------------------------------
     // TaskVoterTest::userCanDelete() |  | Assert  [validé]
     // ---------------------------------------------------------------------- 
-    public function testUserCanDeleteAsAdmin(){
-        LoginAccount::LoginAsAdmin($this->client);
+    public function testUserCanDeleteAsUser(){
+        LoginAccount::LoginAsUser($this->client);
 
         //declenche le voter  TASK_DELETE
-        $this->client->request('GET', '/tasks/1/delete"');
+        $this->client->request('GET', '/tasks/5/delete"');
         $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND); 
-
-        //Assert si le return est true alors ok
-
-
     }
     // ----------------------------------------------------------------------
-    // TaskVoterTest::userCanEdit() |  | Assert  []
+    // TaskVoterTest::userCanEdit() |  | Assert  [validé]
     // ---------------------------------------------------------------------- 
-    public function testUserCanEditAsAdmin(){
-        LoginAccount::LoginAsAdmin($this->client);
+    public function testUserCanEditAsUser(){
+        LoginAccount::LoginAsUser($this->client);
 
         //declenche le voter  TASK_EDIT
         $this->client->request('GET', '/tasks/1/edit');
@@ -60,11 +62,11 @@ class TaskVoterTest extends WebTestCase
     // TaskVoterTest::userCanToogle() |  | Assert  [validé]
     // ---------------------------------------------------------------------- 
     //  vas etre declenche automatiquement ?    
-    public function testUserCanToogleAsAdmin(){
-        LoginAccount::LoginAsAdmin($this->client);
+    public function testUserCanToogleAsUser(){
+        LoginAccount::LoginAsUser($this->client);
 
         //declenche le voter  TASK_TOGGLE
-        $this->client->request('GET', '/tasks/1/toggle');
+        $this->client->request('GET', '/tasks/5/toggle');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
     }    
 }
