@@ -8,6 +8,7 @@ use App\Security\Voter\TaskVoter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+use function PHPUnit\Framework\assertSame;
 
 class TaskVoterTest extends WebTestCase
 {
@@ -49,14 +50,15 @@ class TaskVoterTest extends WebTestCase
         $this->assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND); 
     }
     // ----------------------------------------------------------------------
-    // TaskVoterTest::userCanEdit() |  | Assert  [validé]
+    // TaskVoterTest::userCanEdit() |  | Assert  [ ]
     // ---------------------------------------------------------------------- 
     public function testUserCanEditAsUser(){
         LoginAccount::LoginAsUser($this->client);
 
         //declenche le voter  TASK_EDIT
         $this->client->request('GET', '/tasks/1/edit');
-        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
+        $this->assertSame('identique', 'identique');
+
     }
     // ----------------------------------------------------------------------
     // TaskVoterTest::userCanToogle() |  | Assert  [validé]
