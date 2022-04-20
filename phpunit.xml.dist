@@ -27,6 +27,7 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude></exclude>
     </coverage>
 
     <listeners>

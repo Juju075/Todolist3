@@ -30,13 +30,13 @@ class TasksFixtures extends Fixture implements DependentFixtureInterface
         }
         $manager->flush();
 
-        //Ajout 4 task anonymes
+        //Ajout 4 task anonymes - merde utilise le dernier connu
+
         for ($i=0; $i <5 ; $i++) { 
             $task = new Task();
             $task->setTitle($faker->word());
-            $task->setContent($faker->text(250));
+            $task->setContent('Anonymous content'.'_'.$i);
             $task->setCreatedAt($faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now'));
-            $user->addTask($task);
             $manager->persist($task);
         }
         $manager->flush();
