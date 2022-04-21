@@ -2,13 +2,8 @@
 declare(strict_types = 1); 
 namespace App\Tests\security;
 
-
-use App\Entity\Task;
-use App\Security\Voter\TaskVoter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-use function PHPUnit\Framework\assertSame;
 
 class TaskVoterTest extends WebTestCase
 {
@@ -36,8 +31,6 @@ class TaskVoterTest extends WebTestCase
     // TaskVoterTest::voteOnAttribute() |  | Assert  [validé]
     // ---------------------------------------------------------------------- 
         
-
-
 
     // ----------------------------------------------------------------------
     // TaskVoterTest::userCanDelete() |  | Assert  [validé]
@@ -68,7 +61,7 @@ class TaskVoterTest extends WebTestCase
         LoginAccount::LoginAsUser($this->client);
 
         //declenche le voter  TASK_TOGGLE
-        $this->client->request('GET', '/tasks/5/toggle');
+        $this->client->request('GET', '/tasks/7/toggle');
         $this->assertResponseStatusCodeSame(Response::HTTP_FOUND); 
     }    
 }

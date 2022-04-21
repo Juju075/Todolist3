@@ -30,6 +30,6 @@ private $entityManager ;
             ->getRepository(User::class) 
             ->findOneByEmail('admin@todolist.com');
 
-        $this->assertSame('timothee93', $user->getUsername());
+        $this->assertSame('leveque.lucy', $user->getUsername());
     }
 }

@@ -30,7 +30,6 @@ class TaskEntityTest extends WebTestCase
         ->getManager();
     }
     
-
     /**
      * Refactoring
      *
@@ -57,11 +56,11 @@ class TaskEntityTest extends WebTestCase
 
         return $task; 
     } 
-    public function getTaskByRepository(): Task
+    public function getTaskByRepository(): Task // null
     {
         $user = $this->em
         ->getRepository(Task::class)
-        ->findOneBy(['title'=>'dolor'])
+        ->findOneBy(['title'=>'dolore'])
         ; 
 
         return $user;
@@ -81,7 +80,6 @@ class TaskEntityTest extends WebTestCase
         $this->assertCount($number, $error);
     } 
     
-
     // =======================================================================
     //  test constaint lengh | ok validé
     // =======================================================================  
@@ -108,13 +106,5 @@ class TaskEntityTest extends WebTestCase
             $task = $this->getTaskByRepository();
             
             $this->assertNotEmpty($task->getUser());
-
-
         } 
-
-
-
-
-
-
 }
