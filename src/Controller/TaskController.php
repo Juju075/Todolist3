@@ -92,7 +92,7 @@ class TaskController extends AbstractController
     public function deleteTaskAction(Task $task)
     {
         $this->em->remove($task);
-        //$this->em->flush();
+        $this->em->flush();
         $this->addFlash('success', 'Task has been deleted.');
         return $this->redirectToRoute('task_list');
     }
