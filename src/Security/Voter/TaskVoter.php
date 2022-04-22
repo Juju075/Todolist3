@@ -56,7 +56,6 @@ class TaskVoter extends Voter
             return false;
         }
 
-        //si false 500 Internal error.    
         switch ($attribute) {
             case self::CREATE:
                 return true;

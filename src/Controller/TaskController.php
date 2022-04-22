@@ -73,6 +73,7 @@ class TaskController extends AbstractController
         return $this->renderForm('task/edit.html.twig', ['form'=> $form,'task' => $task]);
     }
 
+
     //#[IsGranted('ROLE_USER', subject: 'task', statusCode: 403)]
     #[Route("/tasks/{id}/toggle", name: "task_toggle")]
     #[IsGranted('TASK_TOGGLE', subject: 'task', statusCode: 403)]
